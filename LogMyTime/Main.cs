@@ -34,6 +34,7 @@ namespace LogMyTime
                 initializeMinimized = false; // prevent from hiding the form onShow again
             }
 
+            today = new DayInfo();
             string line = io.ReadFromFile(today.getSubDirectory(), today.getFilename());
             today = line.Length > 0 ? new DayInfo(line) : new DayInfo();
             today.tick();
