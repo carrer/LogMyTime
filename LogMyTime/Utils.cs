@@ -69,7 +69,7 @@ namespace LogMyTime
         {
             RegistryKey path = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             if (add)
-                path.SetValue("LogMyTime", "\"" + Application.ExecutablePath.ToString() + " --start-minimized\"");
+                path.SetValue("LogMyTime", "\"" + Application.ExecutablePath.ToString() + "\" --start-minimized");
             else
                 path.DeleteValue("LogMyTime");
         }
