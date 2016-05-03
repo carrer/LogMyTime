@@ -39,6 +39,11 @@ namespace LogMyTime
             today = line.Length > 0 ? new DayInfo(line) : new DayInfo();
             today.tick();
             persistData();
+            updateInterface();
+        }
+
+        private void updateInterface()
+        {
             UpdateWorkingHours();
             FulfillDataSource(today);
             UpdateTrayHint();
@@ -138,6 +143,7 @@ namespace LogMyTime
         {
             Show();
             WindowState = FormWindowState.Normal;
+            updateInterface();
         }
 
         private void UpdateTrayHint()
