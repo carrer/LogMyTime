@@ -65,19 +65,21 @@
             this.lblTodayCaption.Size = new System.Drawing.Size(126, 17);
             this.lblTodayCaption.TabIndex = 1;
             this.lblTodayCaption.Text = "You started today at:";
+            this.lblTodayCaption.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblWorkingHoursCaption
             // 
-            this.lblWorkingHoursCaption.AutoSize = true;
             this.lblWorkingHoursCaption.Location = new System.Drawing.Point(15, 36);
             this.lblWorkingHoursCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWorkingHoursCaption.Name = "lblWorkingHoursCaption";
-            this.lblWorkingHoursCaption.Size = new System.Drawing.Size(120, 17);
+            this.lblWorkingHoursCaption.Size = new System.Drawing.Size(126, 17);
             this.lblWorkingHoursCaption.TabIndex = 2;
             this.lblWorkingHoursCaption.Text = "Time worked today:";
+            this.lblWorkingHoursCaption.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // timerSecond
             // 
+            this.timerSecond.Interval = 1000;
             this.timerSecond.Tick += new System.EventHandler(this.timerSecond_Tick);
             // 
             // timerMinute

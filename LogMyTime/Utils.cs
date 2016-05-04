@@ -48,7 +48,7 @@ namespace LogMyTime
             int m = minutes - (h * 60);
             if (m < 0)
                 m *= -1;
-            return string.Format("{0:D2}h {1:D2}m", h, m);
+            return string.Format("{0:D2}:{1:D2}", h, m);
         }
 
         public static string DatetimeToTime(DateTime dt)

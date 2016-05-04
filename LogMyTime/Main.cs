@@ -13,6 +13,7 @@ namespace LogMyTime
         protected DayInfo today;
         protected FileHandler io = new FileHandler();
         protected DataTable dataset;
+        protected int secondsToClose = 1;
 
         public frmMain(bool minimized)
         {
@@ -27,13 +28,6 @@ namespace LogMyTime
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
-            if (initializeMinimized)
-            {
-                Hide();
-                WindowState = FormWindowState.Minimized;
-                initializeMinimized = false; // prevent from hiding the form onShow again
-            }
-
             today = new DayInfo();
             string line = io.ReadFromFile(today.getSubDirectory(), today.getFilename());
             today = line.Length > 0 ? new DayInfo(line) : new DayInfo();
@@ -114,6 +108,14 @@ namespace LogMyTime
         {
             if (DateTime.Now.TimeOfDay.TotalSeconds == 1)
                 today = new DayInfo(); // change dates at midnight 
+
+            if (initializeMinimized)
+                if (secondsToClose-- <= 0)
+                {
+                    initializeMinimized = false; // prevent from hiding the form onShow again
+                    WindowState = FormWindowState.Minimized;
+                }
+
         }
 
         private void timerMinute_Tick(object sender, EventArgs e)
