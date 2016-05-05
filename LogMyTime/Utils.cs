@@ -51,17 +51,44 @@ namespace LogMyTime
             return string.Format("{0:D2}:{1:D2}", h, m);
         }
 
+        public static string SecondsToString(int seconds)
+        {
+            int h = seconds / 3600;
+            int m = seconds - (h * 3600);
+            int s = seconds - (h * 3600) - (m * 60);
+            return string.Format("{0:D2}:{1:D2}:{2:D2}", h, m, s);
+        }
+
         public static string DatetimeToTime(DateTime dt)
         {
             return dt.ToString("HH:mm:ss");
         }
 
-        public static string getWorkingHours(DayInfo day)
+        public static int getWorkingHours(DayInfo day)
         {
+            int working = 0;
             if (day.getFirstActivity() != null)
-                return MinutesToString((int) ((DateTime)day.getLastActivity() - (DateTime)day.getFirstActivity()).TotalMinutes);
-            else
-                return MinutesToString(0);
+            {
+                working = (int)((DateTime)day.getLastActivity() - (DateTime)day.getFirstActivity()).TotalMinutes;
+                ConfigSettings config = ConfigSettings.Instance();
+
+                if (config.Subtract)
+                {
+                    if (config.SubtractCondition == -1)
+                        working -= config.SubtractQuantity;
+                    else if (config.SubtractCondition == 0)
+                    {
+                        if (((DateTime)day.getFirstActivity()).TimeOfDay.TotalHours < 12 && ((DateTime)day.getLastActivity()).TimeOfDay.TotalHours > 12)
+                            working -= config.SubtractQuantity;
+                    }
+                    else
+                    {
+                        if (working > config.SubtractCondition)
+                            working -= config.SubtractQuantity;
+                    }
+                }
+            }
+            return working;
         }
 
         // add/remove binary from Windows Startup list

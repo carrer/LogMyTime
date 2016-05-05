@@ -39,27 +39,30 @@
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.popupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showApp = new System.Windows.Forms.ToolStripMenuItem();
-            this.startup = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.closeApp = new System.Windows.Forms.ToolStripMenuItem();
             this.lblStartTime = new System.Windows.Forms.Label();
             this.lblWorkingHours = new System.Windows.Forms.Label();
             this.reportGrid = new System.Windows.Forms.DataGridView();
-            this.lblPeriodCaption = new System.Windows.Forms.Label();
             this.monthYearPicker = new System.Windows.Forms.DateTimePicker();
             this.lblHistoricalDataCaption = new System.Windows.Forms.Label();
             this.lblAvgCaption = new System.Windows.Forms.Label();
             this.lblTotalCaption = new System.Windows.Forms.Label();
             this.lblAvgTime = new System.Windows.Forms.Label();
             this.lblTotalTime = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configurationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblLeftCaption = new System.Windows.Forms.Label();
+            this.lblLeft = new System.Windows.Forms.Label();
             this.popupMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.reportGrid)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTodayCaption
             // 
             this.lblTodayCaption.AutoSize = true;
-            this.lblTodayCaption.Location = new System.Drawing.Point(15, 9);
+            this.lblTodayCaption.Location = new System.Drawing.Point(9, 29);
             this.lblTodayCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTodayCaption.Name = "lblTodayCaption";
             this.lblTodayCaption.Size = new System.Drawing.Size(126, 17);
@@ -69,10 +72,11 @@
             // 
             // lblWorkingHoursCaption
             // 
-            this.lblWorkingHoursCaption.Location = new System.Drawing.Point(15, 36);
+            this.lblWorkingHoursCaption.AutoSize = true;
+            this.lblWorkingHoursCaption.Location = new System.Drawing.Point(250, 29);
             this.lblWorkingHoursCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWorkingHoursCaption.Name = "lblWorkingHoursCaption";
-            this.lblWorkingHoursCaption.Size = new System.Drawing.Size(126, 17);
+            this.lblWorkingHoursCaption.Size = new System.Drawing.Size(120, 17);
             this.lblWorkingHoursCaption.TabIndex = 2;
             this.lblWorkingHoursCaption.Text = "Time worked today:";
             this.lblWorkingHoursCaption.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -85,6 +89,7 @@
             // timerMinute
             // 
             this.timerMinute.Enabled = true;
+            this.timerMinute.Interval = 60000;
             this.timerMinute.Tick += new System.EventHandler(this.timerMinute_Tick);
             // 
             // trayIcon
@@ -100,42 +105,28 @@
             // 
             this.popupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showApp,
-            this.startup,
-            this.toolStripMenuItem2,
             this.closeApp});
             this.popupMenu.Name = "contextMenuStrip1";
-            this.popupMenu.Size = new System.Drawing.Size(191, 76);
+            this.popupMenu.Size = new System.Drawing.Size(127, 48);
             // 
             // showApp
             // 
             this.showApp.Name = "showApp";
-            this.showApp.Size = new System.Drawing.Size(190, 22);
+            this.showApp.Size = new System.Drawing.Size(126, 22);
             this.showApp.Text = "Show app";
             this.showApp.Click += new System.EventHandler(this.showApp_Click);
-            // 
-            // startup
-            // 
-            this.startup.Name = "startup";
-            this.startup.Size = new System.Drawing.Size(190, 22);
-            this.startup.Text = "Startup with Windows";
-            this.startup.Click += new System.EventHandler(this.startup_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(187, 6);
             // 
             // closeApp
             // 
             this.closeApp.Name = "closeApp";
-            this.closeApp.Size = new System.Drawing.Size(190, 22);
+            this.closeApp.Size = new System.Drawing.Size(126, 22);
             this.closeApp.Text = "Close app";
             this.closeApp.Click += new System.EventHandler(this.closeApp_Click);
             // 
             // lblStartTime
             // 
             this.lblStartTime.AutoSize = true;
-            this.lblStartTime.Location = new System.Drawing.Point(149, 9);
+            this.lblStartTime.Location = new System.Drawing.Point(143, 29);
             this.lblStartTime.Name = "lblStartTime";
             this.lblStartTime.Size = new System.Drawing.Size(58, 17);
             this.lblStartTime.TabIndex = 4;
@@ -144,11 +135,11 @@
             // lblWorkingHours
             // 
             this.lblWorkingHours.AutoSize = true;
-            this.lblWorkingHours.Location = new System.Drawing.Point(149, 36);
+            this.lblWorkingHours.Location = new System.Drawing.Point(377, 29);
             this.lblWorkingHours.Name = "lblWorkingHours";
-            this.lblWorkingHours.Size = new System.Drawing.Size(58, 17);
+            this.lblWorkingHours.Size = new System.Drawing.Size(40, 17);
             this.lblWorkingHours.TabIndex = 5;
-            this.lblWorkingHours.Text = "00:00:00";
+            this.lblWorkingHours.Text = "00:00";
             // 
             // reportGrid
             // 
@@ -174,28 +165,20 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.reportGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.reportGrid.Location = new System.Drawing.Point(18, 88);
+            this.reportGrid.Location = new System.Drawing.Point(12, 80);
             this.reportGrid.MultiSelect = false;
             this.reportGrid.Name = "reportGrid";
             this.reportGrid.ReadOnly = true;
             this.reportGrid.RowHeadersVisible = false;
             this.reportGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.reportGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.reportGrid.Size = new System.Drawing.Size(392, 196);
+            this.reportGrid.Size = new System.Drawing.Size(535, 196);
             this.reportGrid.TabIndex = 15;
-            // 
-            // lblPeriodCaption
-            // 
-            this.lblPeriodCaption.AutoSize = true;
-            this.lblPeriodCaption.Location = new System.Drawing.Point(231, 68);
-            this.lblPeriodCaption.Name = "lblPeriodCaption";
-            this.lblPeriodCaption.Size = new System.Drawing.Size(48, 17);
-            this.lblPeriodCaption.TabIndex = 14;
-            this.lblPeriodCaption.Text = "Period:";
+            this.reportGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.reportGrid_CellFormatting);
             // 
             // monthYearPicker
             // 
-            this.monthYearPicker.Location = new System.Drawing.Point(285, 61);
+            this.monthYearPicker.Location = new System.Drawing.Point(108, 54);
             this.monthYearPicker.Name = "monthYearPicker";
             this.monthYearPicker.Size = new System.Drawing.Size(125, 24);
             this.monthYearPicker.TabIndex = 13;
@@ -204,7 +187,7 @@
             // lblHistoricalDataCaption
             // 
             this.lblHistoricalDataCaption.AutoSize = true;
-            this.lblHistoricalDataCaption.Location = new System.Drawing.Point(15, 68);
+            this.lblHistoricalDataCaption.Location = new System.Drawing.Point(12, 57);
             this.lblHistoricalDataCaption.Name = "lblHistoricalDataCaption";
             this.lblHistoricalDataCaption.Size = new System.Drawing.Size(92, 17);
             this.lblHistoricalDataCaption.TabIndex = 16;
@@ -213,7 +196,7 @@
             // lblAvgCaption
             // 
             this.lblAvgCaption.AutoSize = true;
-            this.lblAvgCaption.Location = new System.Drawing.Point(169, 287);
+            this.lblAvgCaption.Location = new System.Drawing.Point(12, 280);
             this.lblAvgCaption.Name = "lblAvgCaption";
             this.lblAvgCaption.Size = new System.Drawing.Size(178, 17);
             this.lblAvgCaption.TabIndex = 17;
@@ -222,7 +205,7 @@
             // lblTotalCaption
             // 
             this.lblTotalCaption.AutoSize = true;
-            this.lblTotalCaption.Location = new System.Drawing.Point(169, 304);
+            this.lblTotalCaption.Location = new System.Drawing.Point(309, 280);
             this.lblTotalCaption.Name = "lblTotalCaption";
             this.lblTotalCaption.Size = new System.Drawing.Size(177, 17);
             this.lblTotalCaption.TabIndex = 18;
@@ -231,33 +214,81 @@
             // lblAvgTime
             // 
             this.lblAvgTime.AutoSize = true;
-            this.lblAvgTime.Location = new System.Drawing.Point(353, 287);
+            this.lblAvgTime.Location = new System.Drawing.Point(196, 280);
             this.lblAvgTime.Name = "lblAvgTime";
-            this.lblAvgTime.Size = new System.Drawing.Size(57, 17);
+            this.lblAvgTime.Size = new System.Drawing.Size(40, 17);
             this.lblAvgTime.TabIndex = 19;
-            this.lblAvgTime.Text = "00h 00m";
+            this.lblAvgTime.Text = "00:00";
             // 
             // lblTotalTime
             // 
             this.lblTotalTime.AutoSize = true;
-            this.lblTotalTime.Location = new System.Drawing.Point(353, 304);
+            this.lblTotalTime.Location = new System.Drawing.Point(507, 280);
             this.lblTotalTime.Name = "lblTotalTime";
-            this.lblTotalTime.Size = new System.Drawing.Size(57, 17);
+            this.lblTotalTime.Size = new System.Drawing.Size(40, 17);
             this.lblTotalTime.TabIndex = 20;
-            this.lblTotalTime.Text = "00h 00m";
+            this.lblTotalTime.Text = "00:00";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configurationToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(559, 24);
+            this.menuStrip1.TabIndex = 21;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // configurationToolStripMenuItem
+            // 
+            this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configurationToolStripMenuItem1});
+            this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
+            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.configurationToolStripMenuItem.Text = "File";
+            // 
+            // configurationToolStripMenuItem1
+            // 
+            this.configurationToolStripMenuItem1.Name = "configurationToolStripMenuItem1";
+            this.configurationToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.configurationToolStripMenuItem1.Text = "Configuration";
+            this.configurationToolStripMenuItem1.Click += new System.EventHandler(this.configurationToolStripMenuItem1_Click);
+            // 
+            // lblLeftCaption
+            // 
+            this.lblLeftCaption.AutoSize = true;
+            this.lblLeftCaption.Location = new System.Drawing.Point(466, 29);
+            this.lblLeftCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLeftCaption.Name = "lblLeftCaption";
+            this.lblLeftCaption.Size = new System.Drawing.Size(34, 17);
+            this.lblLeftCaption.TabIndex = 22;
+            this.lblLeftCaption.Text = "Left:";
+            this.lblLeftCaption.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblLeft
+            // 
+            this.lblLeft.AutoSize = true;
+            this.lblLeft.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold);
+            this.lblLeft.Location = new System.Drawing.Point(507, 29);
+            this.lblLeft.Name = "lblLeft";
+            this.lblLeft.Size = new System.Drawing.Size(40, 17);
+            this.lblLeft.TabIndex = 23;
+            this.lblLeft.Text = "00:00";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 328);
+            this.ClientSize = new System.Drawing.Size(559, 306);
+            this.Controls.Add(this.lblLeft);
+            this.Controls.Add(this.lblLeftCaption);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.lblTotalTime);
             this.Controls.Add(this.lblAvgTime);
             this.Controls.Add(this.lblTotalCaption);
             this.Controls.Add(this.lblAvgCaption);
             this.Controls.Add(this.lblHistoricalDataCaption);
             this.Controls.Add(this.reportGrid);
-            this.Controls.Add(this.lblPeriodCaption);
             this.Controls.Add(this.monthYearPicker);
             this.Controls.Add(this.lblWorkingHours);
             this.Controls.Add(this.lblStartTime);
@@ -277,6 +308,8 @@
             this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.popupMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.reportGrid)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -290,19 +323,21 @@
         private System.Windows.Forms.NotifyIcon trayIcon;
         private System.Windows.Forms.ContextMenuStrip popupMenu;
         private System.Windows.Forms.ToolStripMenuItem closeApp;
-        private System.Windows.Forms.ToolStripMenuItem startup;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem showApp;
         private System.Windows.Forms.Label lblStartTime;
         private System.Windows.Forms.Label lblWorkingHours;
         private System.Windows.Forms.DataGridView reportGrid;
-        private System.Windows.Forms.Label lblPeriodCaption;
         private System.Windows.Forms.DateTimePicker monthYearPicker;
         private System.Windows.Forms.Label lblHistoricalDataCaption;
         private System.Windows.Forms.Label lblAvgCaption;
         private System.Windows.Forms.Label lblTotalCaption;
         private System.Windows.Forms.Label lblAvgTime;
         private System.Windows.Forms.Label lblTotalTime;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem1;
+        private System.Windows.Forms.Label lblLeftCaption;
+        private System.Windows.Forms.Label lblLeft;
     }
 }
 

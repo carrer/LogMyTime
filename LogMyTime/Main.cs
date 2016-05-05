@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -8,6 +9,7 @@ namespace LogMyTime
 {
     public partial class frmMain : Form
     {
+        protected ConfigSettings config;
         protected bool initializeMinimized;
         protected bool canClose = false;
         protected DayInfo today;
@@ -47,16 +49,20 @@ namespace LogMyTime
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            config = ConfigSettings.Instance();
             monthYearPicker.Format = DateTimePickerFormat.Custom;
             monthYearPicker.CustomFormat = "MM/yyyy";
             dataset = new DataTable();
             dataset.Columns.Add("Day", typeof(int));
             dataset.Columns.Add("Started", typeof(String));
             dataset.Columns.Add("End", typeof(String));
-            dataset.Columns.Add("Total", typeof(String));
+            dataset.Columns.Add("Difference", typeof(String));
+            dataset.Columns.Add("Adjusted", typeof(String));
+            dataset.Columns.Add("Delta", typeof(String));
             reportGrid.DataSource = dataset;
-            reportGrid.Columns[0].Width = 70;
-            startup.Checked = Utils.IsAtWindowsRegistry();
+            reportGrid.Columns[0].Width = 60;
+            reportGrid.Columns[4].Width = 75;
+            reportGrid.Columns[5].Width = 75;
         }
 
         // Prevent from closing the form and exiting the app
@@ -85,12 +91,6 @@ namespace LogMyTime
         private void showApp_Click(object sender, EventArgs e)
         {
             RestoreForm();
-        }
-
-        private void startup_Click(object sender, EventArgs e)
-        {
-            startup.Checked = !startup.Checked;
-            Utils.SetWindowsRegistry(startup.Checked);
         }
 
         private void closeApp_Click(object sender, EventArgs e)
@@ -127,7 +127,10 @@ namespace LogMyTime
                 UpdateTrayHint();
 
                 if (Visible)
+                {
                     UpdateWorkingHours();
+                    FulfillDataSource(today);
+                }
             }
         }
 
@@ -155,7 +158,10 @@ namespace LogMyTime
 
         private void UpdateWorkingHours()
         {
-            lblWorkingHours.Text = Utils.getWorkingHours(today);
+            int worked = Utils.getWorkingHours(today);
+            lblWorkingHours.Text = Utils.MinutesToString(worked);
+            lblLeft.Text = Utils.MinutesToString(worked - config.Workload);
+            lblLeft.ForeColor = lblLeft.Text.IndexOf('-') != -1 ? Color.Red : Color.Black;
         }
 
         private void persistData()
@@ -173,15 +179,49 @@ namespace LogMyTime
                 DayInfo day = new DayInfo(io.ReadFromFile(month.getSubDirectory(), filename));
                 DateTime first = (DateTime)day.getFirstActivity();
                 DateTime last = (DateTime)day.getLastActivity();
-                int working = (int)(last - first).TotalMinutes;
-                timeTotal += working;
-                dataset.Rows.Add(first.Day, Utils.DatetimeToTime(first), Utils.DatetimeToTime(last), Utils.MinutesToString(working));
+                int worked = (int)(last - first).TotalMinutes;
+                int raw = worked;
+                if (config.Subtract)
+                {
+                    if (config.SubtractCondition == -1)
+                        worked -= config.SubtractQuantity;
+                    else if (config.SubtractCondition == 0)
+                    {
+                        if (first.TimeOfDay.TotalHours < 12 && last.TimeOfDay.TotalHours > 12)
+                            worked -= config.SubtractQuantity;
+                    }
+                    else
+                    {
+                        if (worked > config.SubtractCondition)
+                            worked -= config.SubtractQuantity;
+                    }
+                }
+
+                timeTotal += worked;
+                dataset.Rows.Add(first.Day, Utils.DatetimeToTime(first), Utils.DatetimeToTime(last), Utils.MinutesToString(raw), Utils.MinutesToString(worked), Utils.MinutesToString(worked - config.Workload));
             }
 
             int avgTime = files.Count() > 0 ? timeTotal / files.Count() : 0;
             lblAvgTime.Text = Utils.MinutesToString(avgTime);
+            lblAvgTime.ForeColor = avgTime >= 0 ? Color.Black : Color.Red;
             lblTotalTime.Text = Utils.MinutesToString(timeTotal);
+            lblTotalTime.ForeColor = timeTotal >= 0 ? Color.Black : Color.Red;
         }
 
+        private void configurationToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Form f = new Configuration();
+            f.ShowDialog(this);
+            updateInterface();
+        }
+
+        private void reportGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString().IndexOf('-') != -1)
+            {
+                e.CellStyle.BackColor = Color.Red;
+                e.CellStyle.SelectionBackColor = Color.DarkRed;
+            }
+        }
     }
 }
