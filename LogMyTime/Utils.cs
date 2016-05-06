@@ -98,7 +98,8 @@ namespace LogMyTime
             if (add)
                 path.SetValue("LogMyTime", "\"" + Application.ExecutablePath.ToString() + "\" --start-minimized");
             else
-                path.DeleteValue("LogMyTime");
+                if (path.GetValue("LogMyTime") != null)
+                    path.DeleteValue("LogMyTime");
         }
 
         public static bool IsAtWindowsRegistry()
