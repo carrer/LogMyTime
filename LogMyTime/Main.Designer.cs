@@ -51,7 +51,6 @@
             this.lblTotalTime = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.configurationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lblLeftCaption = new System.Windows.Forms.Label();
             this.lblLeft = new System.Windows.Forms.Label();
             this.popupMenu.SuspendLayout();
@@ -147,11 +146,10 @@
             this.reportGrid.AllowUserToDeleteRows = false;
             this.reportGrid.AllowUserToResizeColumns = false;
             this.reportGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 10F);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -241,18 +239,10 @@
             // 
             // configurationToolStripMenuItem
             // 
-            this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.configurationToolStripMenuItem1});
             this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
-            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.configurationToolStripMenuItem.Text = "File";
-            // 
-            // configurationToolStripMenuItem1
-            // 
-            this.configurationToolStripMenuItem1.Name = "configurationToolStripMenuItem1";
-            this.configurationToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
-            this.configurationToolStripMenuItem1.Text = "Configuration";
-            this.configurationToolStripMenuItem1.Click += new System.EventHandler(this.configurationToolStripMenuItem1_Click);
+            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.configurationToolStripMenuItem.Text = "Settings";
+            this.configurationToolStripMenuItem.Click += new System.EventHandler(this.configurationToolStripMenuItem1_Click);
             // 
             // lblLeftCaption
             // 
@@ -335,7 +325,6 @@
         private System.Windows.Forms.Label lblTotalTime;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem1;
         private System.Windows.Forms.Label lblLeftCaption;
         private System.Windows.Forms.Label lblLeft;
     }

@@ -54,10 +54,10 @@ namespace LogMyTime
             monthYearPicker.CustomFormat = "MM/yyyy";
             dataset = new DataTable();
             dataset.Columns.Add("Day", typeof(int));
-            dataset.Columns.Add("Started", typeof(String));
+            dataset.Columns.Add("Start", typeof(String));
             dataset.Columns.Add("End", typeof(String));
-            dataset.Columns.Add("Difference", typeof(String));
-            dataset.Columns.Add("Adjusted", typeof(String));
+            dataset.Columns.Add("Diff", typeof(String));
+            dataset.Columns.Add("Net", typeof(String));
             dataset.Columns.Add("Delta", typeof(String));
             reportGrid.DataSource = dataset;
             reportGrid.Columns[0].Width = 60;
