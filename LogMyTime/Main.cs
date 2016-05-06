@@ -131,6 +131,20 @@ namespace LogMyTime
                     UpdateWorkingHours();
                     FulfillDataSource(today);
                 }
+
+                if (config.Warn && Utils.getWorkingHours(today) == config.WarnCondition)
+                {
+                    /*
+                     * gohome.ShowModal() doesn't bring the Form to focus,
+                     * therefore keyboard events aren't capture by the form (for
+                     * auto closing) 
+                     */
+                    Form gohome = new Warn();
+                    gohome.WindowState = FormWindowState.Minimized;
+                    gohome.Show();
+                    gohome.WindowState = FormWindowState.Maximized;
+                }
+
             }
         }
 

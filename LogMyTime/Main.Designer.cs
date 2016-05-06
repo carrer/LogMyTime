@@ -49,13 +49,13 @@
             this.lblTotalCaption = new System.Windows.Forms.Label();
             this.lblAvgTime = new System.Windows.Forms.Label();
             this.lblTotalTime = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainMenu = new System.Windows.Forms.MenuStrip();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblLeftCaption = new System.Windows.Forms.Label();
             this.lblLeft = new System.Windows.Forms.Label();
             this.popupMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.reportGrid)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTodayCaption
@@ -106,20 +106,20 @@
             this.showApp,
             this.closeApp});
             this.popupMenu.Name = "contextMenuStrip1";
-            this.popupMenu.Size = new System.Drawing.Size(127, 48);
+            this.popupMenu.Size = new System.Drawing.Size(153, 70);
             // 
             // showApp
             // 
             this.showApp.Name = "showApp";
-            this.showApp.Size = new System.Drawing.Size(126, 22);
-            this.showApp.Text = "Show app";
+            this.showApp.Size = new System.Drawing.Size(152, 22);
+            this.showApp.Text = "Show";
             this.showApp.Click += new System.EventHandler(this.showApp_Click);
             // 
             // closeApp
             // 
             this.closeApp.Name = "closeApp";
-            this.closeApp.Size = new System.Drawing.Size(126, 22);
-            this.closeApp.Text = "Close app";
+            this.closeApp.Size = new System.Drawing.Size(152, 22);
+            this.closeApp.Text = "Close";
             this.closeApp.Click += new System.EventHandler(this.closeApp_Click);
             // 
             // lblStartTime
@@ -146,10 +146,11 @@
             this.reportGrid.AllowUserToDeleteRows = false;
             this.reportGrid.AllowUserToResizeColumns = false;
             this.reportGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 10F);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -227,22 +228,22 @@
             this.lblTotalTime.TabIndex = 20;
             this.lblTotalTime.Text = "00:00";
             // 
-            // menuStrip1
+            // mainMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.configurationToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(559, 24);
-            this.menuStrip1.TabIndex = 21;
-            this.menuStrip1.Text = "menuStrip1";
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem});
+            this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.Size = new System.Drawing.Size(559, 24);
+            this.mainMenu.TabIndex = 21;
+            this.mainMenu.Text = "menuStrip1";
             // 
-            // configurationToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
-            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.configurationToolStripMenuItem.Text = "Settings";
-            this.configurationToolStripMenuItem.Click += new System.EventHandler(this.configurationToolStripMenuItem1_Click);
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.configurationToolStripMenuItem1_Click);
             // 
             // lblLeftCaption
             // 
@@ -272,7 +273,7 @@
             this.ClientSize = new System.Drawing.Size(559, 306);
             this.Controls.Add(this.lblLeft);
             this.Controls.Add(this.lblLeftCaption);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.mainMenu);
             this.Controls.Add(this.lblTotalTime);
             this.Controls.Add(this.lblAvgTime);
             this.Controls.Add(this.lblTotalCaption);
@@ -298,8 +299,8 @@
             this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.popupMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.reportGrid)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.mainMenu.ResumeLayout(false);
+            this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,10 +324,10 @@
         private System.Windows.Forms.Label lblTotalCaption;
         private System.Windows.Forms.Label lblAvgTime;
         private System.Windows.Forms.Label lblTotalTime;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.Label lblLeftCaption;
         private System.Windows.Forms.Label lblLeft;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }
 

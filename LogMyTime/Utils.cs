@@ -44,21 +44,13 @@ namespace LogMyTime
 
         public static string MinutesToString(int minutes)
         {
+            bool negative = minutes < 0;
+            if (negative)
+                minutes *= -1;
             int h = minutes / 60;
             int m = minutes - (h * 60);
-            if (m < 0)
-                m *= -1;
-            return string.Format("{0:D2}:{1:D2}", h, m);
+            return (negative ? "-" : "") + string.Format("{0:D2}:{1:D2}", h, m);
         }
-
-        public static string SecondsToString(int seconds)
-        {
-            int h = seconds / 3600;
-            int m = seconds - (h * 3600);
-            int s = seconds - (h * 3600) - (m * 60);
-            return string.Format("{0:D2}:{1:D2}:{2:D2}", h, m, s);
-        }
-
         public static string DatetimeToTime(DateTime dt)
         {
             return dt.ToString("HH:mm:ss");
@@ -98,7 +90,8 @@ namespace LogMyTime
             if (add)
                 path.SetValue("LogMyTime", "\"" + Application.ExecutablePath.ToString() + "\" --start-minimized");
             else
-                path.DeleteValue("LogMyTime");
+                if (path.GetValue("LogMyTime") != null)
+                    path.DeleteValue("LogMyTime");
         }
 
         public static bool IsAtWindowsRegistry()
