@@ -106,12 +106,26 @@ namespace LogMyTime
 
         public void setFirstActivity(string t)
         {
-            activityFirst = DateTime.ParseExact(getDayToString()+t.Replace(":",""), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+            try
+            {
+                activityFirst = DateTime.ParseExact(getDayToString() + t.Replace(":", ""), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            catch(Exception e)
+            {
+                //don't set
+            }
         }
 
         public void setLastActivity(string t)
         {
-            activityLast = DateTime.ParseExact(getDayToString() + t.Replace(":", ""), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+            try
+            {
+                activityLast = DateTime.ParseExact(getDayToString() + t.Replace(":", ""), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            catch (Exception e)
+            {
+                //don't set
+            }
         }
 
     }

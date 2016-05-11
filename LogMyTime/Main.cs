@@ -25,9 +25,9 @@ namespace LogMyTime
             initializeMinimized = minimized;
         }
 
- /*
- * Form Events
- */
+        /*
+        * Form Events
+        */
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
@@ -85,9 +85,9 @@ namespace LogMyTime
                 Hide();
         }
 
-/*
- * popupMenu buttons
- */
+        /*
+         * popupMenu buttons
+         */
 
         private void showApp_Click(object sender, EventArgs e)
         {
@@ -155,9 +155,9 @@ namespace LogMyTime
             FulfillDataSource(new DayInfo(m, m, m));
         }
 
-/*
- * Auxiliary methods
- */
+        /*
+         * Auxiliary methods
+         */
 
         private void RestoreForm()
         {
@@ -241,20 +241,33 @@ namespace LogMyTime
 
         private void reportGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex>=1 && e.ColumnIndex<=2)
+            if (e.ColumnIndex >= 1 && e.ColumnIndex <= 2)
             {
                 int c = e.ColumnIndex == 1 ? 0 : 1;
                 DateInput form = new DateInput(this);
-                string csv = today.getMonth() + dataset.Rows[e.RowIndex][0].ToString() + ";" + dataset.Rows[e.RowIndex][1].ToString() + ";" + dataset.Rows[e.RowIndex][e.ColumnIndex].ToString();
-                form.setTime(new DayInfo(csv), c);
+                DayInfo d = getItem(e.RowIndex);
+                if (d.getDayToString().Equals(today.getDayToString()) && c == 1)
+                    return;
+                form.setTime(d, c);
                 form.ShowDialog();
             }
         }
 
+        private DayInfo getItem(int row)
+        {
+            string day = today.getMonth() + Convert.ToInt16(dataset.Rows[row][0]).ToString("D2");
+            string csv = day + ";" + day + dataset.Rows[row][1].ToString().Replace(":", "") + ";" + day + dataset.Rows[row][2].ToString().Replace(":", "");
+            return new DayInfo(csv);
+
+        }
+
         public void callbackSetTime(DayInfo output)
         {
+            if (output.getDayToString().Equals(today.getDayToString()))
+                this.today = output;
             io.WriteToFile(output.getSubDirectory(), output.getFilename(), output.ToCSV());
             FulfillDataSource(today);
         }
+
     }
 }

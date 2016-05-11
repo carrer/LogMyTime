@@ -25,8 +25,9 @@ namespace LogMyTime
         public void setTime(DayInfo d, int f)
         {
             edit = d;
+            field = f;
             if (f == 0)
-                dtInput.Value = (DateTime) edit.getFirstActivity();
+                dtInput.Value = (DateTime)edit.getFirstActivity();
             else
                 dtInput.Value = (DateTime)edit.getLastActivity();
         }
@@ -64,6 +65,7 @@ namespace LogMyTime
             this.dtInput.ShowUpDown = true;
             this.dtInput.Size = new System.Drawing.Size(77, 23);
             this.dtInput.TabIndex = 0;
+            this.dtInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dtInput_KeyDown);
             // 
             // btnOk
             // 
