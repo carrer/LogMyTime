@@ -168,7 +168,7 @@ namespace LogMyTime
 
         private void UpdateTrayHint()
         {
-            trayIcon.Text = "Today you worked " + Utils.getWorkingHours(today);
+            trayIcon.Text = "Today you worked " + Utils.MinutesToString(Utils.getWorkingHours(today));
         }
 
         private void UpdateWorkingHours()
@@ -176,7 +176,17 @@ namespace LogMyTime
             int worked = Utils.getWorkingHours(today);
             lblWorkingHours.Text = Utils.MinutesToString(worked);
             lblLeft.Text = Utils.MinutesToString(worked - config.Workload);
-            lblLeft.ForeColor = lblLeft.Text.IndexOf('-') != -1 ? Color.Red : Color.Black;
+            if (lblLeft.Text.IndexOf('-') != -1)
+            {
+                lblLeft.ForeColor = Color.Red;
+                lblLeftCaption.Text = "Left to go:";
+            }
+            else
+            {
+                lblLeft.ForeColor = Color.Black;
+                lblLeftCaption.Text = "Overstayed:";
+            }
+
         }
 
         private void persistData()
@@ -263,10 +273,13 @@ namespace LogMyTime
 
         public void callbackSetTime(DayInfo output)
         {
-            if (output.getDayToString().Equals(today.getDayToString()))
-                this.today = output;
             io.WriteToFile(output.getSubDirectory(), output.getFilename(), output.ToCSV());
             FulfillDataSource(today);
+            if (output.getDayToString().Equals(today.getDayToString()))
+            {
+                this.today = output;
+                updateInterface();
+            }
         }
 
     }

@@ -72,7 +72,7 @@
             // lblWorkingHoursCaption
             // 
             this.lblWorkingHoursCaption.AutoSize = true;
-            this.lblWorkingHoursCaption.Location = new System.Drawing.Point(250, 29);
+            this.lblWorkingHoursCaption.Location = new System.Drawing.Point(237, 29);
             this.lblWorkingHoursCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWorkingHoursCaption.Name = "lblWorkingHoursCaption";
             this.lblWorkingHoursCaption.Size = new System.Drawing.Size(120, 17);
@@ -134,7 +134,7 @@
             // lblWorkingHours
             // 
             this.lblWorkingHours.AutoSize = true;
-            this.lblWorkingHours.Location = new System.Drawing.Point(377, 29);
+            this.lblWorkingHours.Location = new System.Drawing.Point(364, 29);
             this.lblWorkingHours.Name = "lblWorkingHours";
             this.lblWorkingHours.Size = new System.Drawing.Size(40, 17);
             this.lblWorkingHours.TabIndex = 5;
@@ -249,12 +249,12 @@
             // lblLeftCaption
             // 
             this.lblLeftCaption.AutoSize = true;
-            this.lblLeftCaption.Location = new System.Drawing.Point(466, 29);
+            this.lblLeftCaption.Location = new System.Drawing.Point(430, 29);
             this.lblLeftCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLeftCaption.Name = "lblLeftCaption";
-            this.lblLeftCaption.Size = new System.Drawing.Size(34, 17);
+            this.lblLeftCaption.Size = new System.Drawing.Size(66, 17);
             this.lblLeftCaption.TabIndex = 22;
-            this.lblLeftCaption.Text = "Left:";
+            this.lblLeftCaption.Text = "Left to go:";
             this.lblLeftCaption.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblLeft
