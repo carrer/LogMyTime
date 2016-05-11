@@ -41,13 +41,19 @@ namespace LogMyTime
                     {
                         this.activityFirst = DateTime.ParseExact(dates[1], "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
                     }
-                    catch (Exception e) { }
+                    catch (Exception e)
+                    {
+                        //ignore
+                    }
                 if (dates[1].Length > 0)
                     try
                     {
                         this.activityLast = DateTime.ParseExact(dates[2], "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
                     }
-                    catch (Exception e) { }
+                    catch (Exception e)
+                    {
+                        //ignore
+                    }
             }
             else
                 this.date = DateTime.Now;
@@ -86,6 +92,26 @@ namespace LogMyTime
         public string getSubDirectory()
         {
             return string.Format("{0:D4}\\{1:D2}\\", date.Year, date.Month);
+        }
+
+        public string getMonth()
+        {
+            return string.Format("{0:D4}{1:D2}", date.Year, date.Month);
+        }
+
+        public string getDayToString()
+        {
+            return date.ToString("yyyyMMdd");
+        }
+
+        public void setFirstActivity(string t)
+        {
+            activityFirst = DateTime.ParseExact(getDayToString()+t.Replace(":",""), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public void setLastActivity(string t)
+        {
+            activityLast = DateTime.ParseExact(getDayToString() + t.Replace(":", ""), "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
         }
 
     }

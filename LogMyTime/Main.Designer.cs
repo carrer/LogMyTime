@@ -106,19 +106,19 @@
             this.showApp,
             this.closeApp});
             this.popupMenu.Name = "contextMenuStrip1";
-            this.popupMenu.Size = new System.Drawing.Size(153, 70);
+            this.popupMenu.Size = new System.Drawing.Size(104, 48);
             // 
             // showApp
             // 
             this.showApp.Name = "showApp";
-            this.showApp.Size = new System.Drawing.Size(152, 22);
+            this.showApp.Size = new System.Drawing.Size(103, 22);
             this.showApp.Text = "Show";
             this.showApp.Click += new System.EventHandler(this.showApp_Click);
             // 
             // closeApp
             // 
             this.closeApp.Name = "closeApp";
-            this.closeApp.Size = new System.Drawing.Size(152, 22);
+            this.closeApp.Size = new System.Drawing.Size(103, 22);
             this.closeApp.Text = "Close";
             this.closeApp.Click += new System.EventHandler(this.closeApp_Click);
             // 
@@ -170,9 +170,10 @@
             this.reportGrid.ReadOnly = true;
             this.reportGrid.RowHeadersVisible = false;
             this.reportGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.reportGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.reportGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.reportGrid.Size = new System.Drawing.Size(535, 196);
             this.reportGrid.TabIndex = 15;
+            this.reportGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.reportGrid_CellDoubleClick);
             this.reportGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.reportGrid_CellFormatting);
             // 
             // monthYearPicker

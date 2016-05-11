@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -236,6 +237,24 @@ namespace LogMyTime
                 e.CellStyle.BackColor = Color.Red;
                 e.CellStyle.SelectionBackColor = Color.DarkRed;
             }
+        }
+
+        private void reportGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex>=1 && e.ColumnIndex<=2)
+            {
+                int c = e.ColumnIndex == 1 ? 0 : 1;
+                DateInput form = new DateInput(this);
+                string csv = today.getMonth() + dataset.Rows[e.RowIndex][0].ToString() + ";" + dataset.Rows[e.RowIndex][1].ToString() + ";" + dataset.Rows[e.RowIndex][e.ColumnIndex].ToString();
+                form.setTime(new DayInfo(csv), c);
+                form.ShowDialog();
+            }
+        }
+
+        public void callbackSetTime(DayInfo output)
+        {
+            io.WriteToFile(output.getSubDirectory(), output.getFilename(), output.ToCSV());
+            FulfillDataSource(today);
         }
     }
 }
