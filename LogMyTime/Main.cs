@@ -14,6 +14,7 @@ namespace LogMyTime
         protected bool initializeMinimized;
         protected bool canClose = false;
         protected DayInfo today;
+        protected DataGridViewRow todayRow;
         protected FileHandler io = new FileHandler();
         protected DataTable dataset;
         protected int secondsToClose = 1;
@@ -44,7 +45,7 @@ namespace LogMyTime
             UpdateWorkingHours();
             FulfillDataSource(today);
             UpdateTrayHint();
-            lblStartTime.Text = today.getFirstActivity() != null ? Utils.DatetimeToTime((DateTime)today.getFirstActivity()) : "(missing)";
+//            lblStartTime.Text = today.getFirstActivity() != null ? Utils.DatetimeToTime((DateTime)today.getFirstActivity()) : "(missing)";
             timerSecond.Enabled = true;
         }
 
@@ -64,6 +65,8 @@ namespace LogMyTime
             reportGrid.Columns[0].Width = 60;
             reportGrid.Columns[4].Width = 75;
             reportGrid.Columns[5].Width = 75;
+            gridToday.Rows.Add("dd/mm/yyyy", "00:00:00", "00:00:00", "00:00", "00:00", "00:00");
+            todayRow = gridToday.Rows[0];
         }
 
         // Prevent from closing the form and exiting the app
@@ -173,20 +176,13 @@ namespace LogMyTime
 
         private void UpdateWorkingHours()
         {
+            todayRow.Cells[0].Value = today.GetFormattedDay();
+            todayRow.Cells[1].Value = today.GetFormattedFirstActivity();
+            todayRow.Cells[2].Value = today.GetFormattedLastActivity();
+            todayRow.Cells[3].Value = Utils.MinutesToString(Utils.GetRawDiff(today));
             int worked = Utils.getWorkingHours(today);
-            lblWorkingHours.Text = Utils.MinutesToString(worked);
-            lblLeft.Text = Utils.MinutesToString(worked - config.Workload);
-            if (lblLeft.Text.IndexOf('-') != -1)
-            {
-                lblLeft.ForeColor = Color.Red;
-                lblLeftCaption.Text = "Left to go:";
-            }
-            else
-            {
-                lblLeft.ForeColor = Color.Black;
-                lblLeftCaption.Text = "Overstayed:";
-            }
-
+            todayRow.Cells[4].Value = Utils.MinutesToString(worked);
+            todayRow.Cells[5].Value = Utils.MinutesToString(worked - config.Workload);
         }
 
         private void persistData()
@@ -196,7 +192,12 @@ namespace LogMyTime
 
         private void FulfillDataSource(DayInfo month)
         {
-            int timeTotal = 0;
+            int totalNet = 0;
+            int totalDelta = 0;
+            int avgStart = 0;
+            int avgEnd = 0;
+            int avgDiff = 0;
+
             dataset.Rows.Clear();
             List<string> files = io.ListAllFiles(month.getSubDirectory());
             foreach (string filename in files.OrderByDescending(o => o).ToList())
@@ -205,6 +206,10 @@ namespace LogMyTime
                 DateTime first = (DateTime)day.getFirstActivity();
                 DateTime last = (DateTime)day.getLastActivity();
                 int worked = (int)(last - first).TotalMinutes;
+                avgDiff += worked;
+                avgStart += (int) first.TimeOfDay.TotalSeconds;
+                avgEnd += (int) last.TimeOfDay.TotalSeconds;
+
                 int raw = worked;
                 if (config.Subtract)
                 {
@@ -221,16 +226,38 @@ namespace LogMyTime
                             worked -= config.SubtractQuantity;
                     }
                 }
-
-                timeTotal += worked;
+                totalNet += worked;
+                totalDelta += ( worked - config.Workload );
                 dataset.Rows.Add(first.Day, Utils.DatetimeToTime(first), Utils.DatetimeToTime(last), Utils.MinutesToString(raw), Utils.MinutesToString(worked), Utils.MinutesToString(worked - config.Workload));
             }
 
-            int avgTime = files.Count() > 0 ? timeTotal / files.Count() : 0;
-            lblAvgTime.Text = Utils.MinutesToString(avgTime);
-            lblAvgTime.ForeColor = avgTime >= 0 ? Color.Black : Color.Red;
-            lblTotalTime.Text = Utils.MinutesToString(timeTotal);
-            lblTotalTime.ForeColor = timeTotal >= 0 ? Color.Black : Color.Red;
+            if (files.Count==0)
+            {
+                lblAvgDelta.Text = "";
+                lblAvgDiff.Text = "";
+                lblAvgNet.Text = "";
+                lblAvgStart.Text = "";
+                lblAvgEnd.Text = "";
+                lblTotalDelta.Text = "";
+                lblTotalNet.Text = "";
+            }
+            else
+            {
+                lblAvgStart.Text = Utils.SecondsToString(avgStart / files.Count);
+                lblAvgEnd.Text = Utils.SecondsToString(avgEnd / files.Count);
+                lblAvgDelta.Text = Utils.MinutesToString(totalDelta / files.Count);
+                lblAvgDiff.Text = Utils.MinutesToString(avgDiff / files.Count);
+                lblAvgNet.Text = Utils.MinutesToString(totalNet / files.Count);
+                lblTotalDelta.Text = Utils.MinutesToString(totalDelta);
+                lblTotalNet.Text = Utils.MinutesToString(totalNet);
+            }
+
+/*
+            lblAvgNet.Text = Utils.MinutesToString(avgTime);
+            lblAvgNet.ForeColor = avgTime >= 0 ? Color.Black : Color.Red;
+            lblTotalNet.Text = Utils.MinutesToString(timeTotal);
+            lblTotalNet.ForeColor = timeTotal >= 0 ? Color.Black : Color.Red;
+*/
         }
 
         private void configurationToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -246,6 +273,7 @@ namespace LogMyTime
             {
                 e.CellStyle.BackColor = Color.Red;
                 e.CellStyle.SelectionBackColor = Color.DarkRed;
+                e.CellStyle.SelectionForeColor = Color.White;
             }
         }
 
@@ -282,5 +310,13 @@ namespace LogMyTime
             }
         }
 
+        private void lblLabel_TextChanged(object sender, EventArgs e)
+        {
+            Label label = (Label)sender;
+            if (label.Text.IndexOf('-') != -1)
+                label.ForeColor = Color.Red;
+            else
+                label.ForeColor = Color.Black;
+        }
     }
 }

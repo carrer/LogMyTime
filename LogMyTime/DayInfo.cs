@@ -104,6 +104,21 @@ namespace LogMyTime
             return date.ToString("yyyyMMdd");
         }
 
+        public string GetFormattedDay()
+        {
+            return date.ToString("dd/MM");
+        }
+
+        public string GetFormattedFirstActivity()
+        {
+            return activityFirst != null ? activityFirst.Value.ToString("HH:mm:ss") : "(missing)";
+        }
+
+        public string GetFormattedLastActivity()
+        {
+            return activityFirst != null ? activityFirst.Value.ToString("HH:mm:ss") : "(missing)";
+        }
+
         public void setFirstActivity(string t)
         {
             try

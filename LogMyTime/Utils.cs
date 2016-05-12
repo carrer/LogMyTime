@@ -51,6 +51,18 @@ namespace LogMyTime
             int m = minutes - (h * 60);
             return (negative ? "-" : "") + string.Format("{0:D2}:{1:D2}", h, m);
         }
+
+        public static string SecondsToString(int seconds)
+        {
+            bool negative = seconds < 0;
+            if (negative)
+                seconds *= -1;
+            int h = seconds / 3600;
+            int m = ( seconds - (h * 3600) ) / 60;
+            int s = seconds - (h * 3600) - (m * 60);
+            return (negative ? "-" : "") + string.Format("{0:D2}:{1:D2}:{2:D2}", h, m, s);
+        }
+
         public static string DatetimeToTime(DateTime dt)
         {
             return dt.ToString("HH:mm:ss");
@@ -83,6 +95,12 @@ namespace LogMyTime
             return working;
         }
 
+        public static int GetRawDiff(DayInfo day)
+        {
+            if (day.getFirstActivity() != null)
+                return (int)((DateTime)day.getLastActivity() - (DateTime)day.getFirstActivity()).TotalMinutes;
+            return 0;
+        }
         // add/remove binary from Windows Startup list
         public static void SetWindowsRegistry(bool add)
         {

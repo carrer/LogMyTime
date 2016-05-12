@@ -29,7 +29,10 @@ namespace LogMyTime
         private void dtInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+            {
+                btnOk.Focus();
                 btnOk_Click(sender, e);
+            }
         }
     }
 }
