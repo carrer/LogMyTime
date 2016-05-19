@@ -1,6 +1,6 @@
 ﻿namespace LogMyTime
 {
-    partial class Configuration
+    partial class ConfigurationView
     {
         /// <summary>
         /// Required designer variable.
@@ -157,7 +157,7 @@
             this.dtWorkload.TabIndex = 14;
             this.dtWorkload.Value = new System.DateTime(2016, 5, 5, 0, 0, 0, 0);
             // 
-            // Configuration
+            // frmConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -177,7 +177,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Configuration";
+            this.Name = "frmConfiguration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Configuration";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Configuration_FormClosing);

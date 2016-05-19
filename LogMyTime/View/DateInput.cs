@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogMyTime.Presenter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,21 +10,30 @@ using System.Windows.Forms;
 
 namespace LogMyTime
 {
-    public partial class DateInput : Form
+    public partial class DateInputView : Form
     {
-        private Form _parent;
-        private DayInfo edit;
-        private int field;
+        public DateInputPresenter Presenter { get; set; }
 
-        public DateInput(Form p)
+        public DateInputView(Form p)
         {
             InitializeComponent();
-            _parent = p;
+        }
+
+        public DateTime DateField
+        {
+            set
+            {
+                dtInput.Value = value;
+            }
+            get
+            {
+                return dtInput.Value;
+            }
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            callBack();
+            Presenter.OK();
         }
 
         private void dtInput_KeyDown(object sender, KeyEventArgs e)

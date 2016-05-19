@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LogMyTime.Model;
+using LogMyTime.Presenter;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -14,7 +16,12 @@ namespace LogMyTime
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain(args.Count() > 0 && args[0].Equals("--start-minimized")));
+            MainModel model = new MainModel();
+            MainView view = new MainView();
+            MainPresenter presenter = new MainPresenter(model, view);
+            if (args.Count() > 0 && args[0].Equals("--start-minimized"))
+                presenter.InitializeMinimized = true;
+            Application.Run(view);
         }
     }
 }

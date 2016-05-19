@@ -6,9 +6,9 @@ using System.Text;
 
 namespace LogMyTime
 {
-    public class ConfigSettings
+    public class ConfigurationSettings
     {
-        private static ConfigSettings instance;
+        private static ConfigurationSettings instance;
         public int Workload;
         public bool Startup;
         public bool Subtract;
@@ -17,15 +17,15 @@ namespace LogMyTime
         public bool Warn;
         public int WarnCondition;
 
-        private ConfigSettings()
+        private ConfigurationSettings()
         {
             LoadFromRegistry();
         }
 
-        public static ConfigSettings Instance()
+        public static ConfigurationSettings GetInstance()
         {
             if (instance == null)
-                instance = new ConfigSettings();
+                instance = new ConfigurationSettings();
 
             return instance;
         }

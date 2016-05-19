@@ -2,7 +2,7 @@
 
 namespace LogMyTime
 {
-    partial class DateInput
+    partial class DateInputView
     {
         /// <summary>
         /// Required designer variable.
@@ -20,27 +20,6 @@ namespace LogMyTime
                 components.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public void setTime(DayInfo d, int f)
-        {
-            edit = d;
-            field = f;
-            if (f == 0)
-                dtInput.Value = (DateTime)edit.getFirstActivity();
-            else
-                dtInput.Value = (DateTime)edit.getLastActivity();
-        }
-
-        public void callBack()
-        {
-            if (field == 0)
-                edit.setFirstActivity(dtInput.Value.ToString("HH:mm:ss"));
-            else
-                edit.setLastActivity(dtInput.Value.ToString("HH:mm:ss"));
-
-            ((frmMain)_parent).callbackSetTime(edit);
-            Close();
         }
 
         #region Windows Form Designer generated code

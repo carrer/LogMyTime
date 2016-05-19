@@ -46,7 +46,6 @@ namespace LogMyTimeUnitTests
             List<String> files = io.ListAllFiles("2000\\12\\");
             Assert.IsTrue(files.Count != 0);
             Assert.AreEqual<string>("20001201.csv", files[0]);
-            Assert.AreEqual<string>("20001210.csv", files[1]);
         }
     }
 }
