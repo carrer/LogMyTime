@@ -39,7 +39,7 @@ namespace LogMyTime
                 if (dates[1].Length > 0)
                     try
                     {
-                        this.activityFirst = DateTime.ParseExact(dates[1], "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                        this.activityFirst = DateTime.ParseExact(GetDateToString() + dates[1], "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
                     }
                     catch (Exception e)
                     {
@@ -48,7 +48,7 @@ namespace LogMyTime
                 if (dates[1].Length > 0)
                     try
                     {
-                        this.activityLast = DateTime.ParseExact(dates[2], "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                        this.activityLast = DateTime.ParseExact(GetDateToString() + dates[2], "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
                     }
                     catch (Exception e)
                     {
@@ -61,8 +61,8 @@ namespace LogMyTime
 
         public string ToCSV()
         {
-            string d1 = activityFirst != null ? ((DateTime)activityFirst).ToString("yyyyMMddHHmmss") : "";
-            string d2 = activityLast != null ? ((DateTime)activityLast).ToString("yyyyMMddHHmmss") : "";
+            string d1 = activityFirst != null ? ((DateTime)activityFirst).ToString("HHmmss") : "";
+            string d2 = activityLast != null ? ((DateTime)activityLast).ToString("HHmmss") : "";
             return date.ToString("yyyyMMdd") + ";" + d1 + ";" + d2;
         }
 

@@ -18,7 +18,7 @@ namespace LogMyTimeUnitTests
         {
             MainModel model = new MainModel();
             model.InjectPath(Directory.GetCurrentDirectory());
-            model.SetMonth(new LogMyTime.DayInfo("20001201;20001201080000;20001201180000"));
+            model.SetMonth(new LogMyTime.DayInfo("20001201;080000;180000"));
             model.CalcMonth();
             ConfigurationSettings config = ConfigurationSettings.GetInstance();
             config.Subtract = false;
