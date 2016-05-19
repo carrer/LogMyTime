@@ -13,7 +13,6 @@ namespace LogMyTime.Presenter
 
         private DayInfoRow edit;
         private bool editStartField;
-        private bool editFromReport;
 
         // to implement --start-minimized feature
         public bool InitializeMinimized { get; set; }
@@ -120,7 +119,6 @@ namespace LogMyTime.Presenter
             if (edit.Day == model.GetToday().GetDay() && edit.Month.Equals(model.GetToday().GetMonth()) && !editStartField)
                 return;
 
-            editFromReport = today;
             view.ShowDateInputForm(date);
         }
 
@@ -133,9 +131,7 @@ namespace LogMyTime.Presenter
 
             model.UpdateRow(edit);
 
-            if (editFromReport)
-                UpdateMonth();
-
+            UpdateMonth();
             UpdateWorkingHour();
 
         }

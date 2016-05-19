@@ -48,8 +48,8 @@ namespace LogMyTime.Model
         public void UpdateRow(DayInfoRow row)
         {
             string prefix = row.Month + row.Day;
-            string start = prefix + row.Start.Replace(":", "");
-            string end = prefix + row.End.Replace(":", "");
+            string start = row.Start.Replace(":", "");
+            string end = row.End.Replace(":", "");
             DayInfo d = new DayInfo(prefix + ";" + start + ";" + end);
             if (d.GetDateToString().Equals(today.GetDateToString()))
             {
