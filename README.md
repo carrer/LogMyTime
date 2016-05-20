@@ -7,4 +7,4 @@ Screenshots:
 
 ![ScreenShot](/screenshots/Configuration.png)
 
-[Download latest release](https://github.com/carrer/LogMyTime/releases/download/1.1/LogMyTime.zip)
+[Download latest release](https://github.com/carrer/LogMyTime/releases/latest)
