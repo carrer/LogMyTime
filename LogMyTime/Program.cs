@@ -19,7 +19,7 @@ namespace LogMyTime
             MainModel model = new MainModel();
             MainView view = new MainView();
             MainPresenter presenter = new MainPresenter(model, view);
-            if (args.Count() > 0 && args[0].Equals("--start-minimized"))
+            if (args.Contains("--start-minimized"))
                 presenter.InitializeMinimized = true;
             Application.Run(view);
         }

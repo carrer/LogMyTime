@@ -1,4 +1,6 @@
-﻿namespace LogMyTime
+﻿using System;
+
+namespace LogMyTime
 {
     partial class MainView
     {
@@ -41,13 +43,10 @@
             this.showApp = new System.Windows.Forms.ToolStripMenuItem();
             this.closeApp = new System.Windows.Forms.ToolStripMenuItem();
             this.gridReport = new System.Windows.Forms.DataGridView();
-            this.clMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clDayReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clStartReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clEndReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clDiffReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clNetReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clDeltaReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clipboardMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyCellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.monthYearPicker = new System.Windows.Forms.DateTimePicker();
             this.lblHistoricalDataCaption = new System.Windows.Forms.Label();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
@@ -69,8 +68,16 @@
             this.lblAvgDelta = new System.Windows.Forms.Label();
             this.lblTotalNet = new System.Windows.Forms.Label();
             this.lblTotalDelta = new System.Windows.Forms.Label();
+            this.clMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDayReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clStartReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clEndReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDiffReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clNetReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDeltaReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.popupMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridReport)).BeginInit();
+            this.clipboardMenu.SuspendLayout();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridToday)).BeginInit();
             this.SuspendLayout();
@@ -122,7 +129,6 @@
             // 
             this.gridReport.AllowUserToAddRows = false;
             this.gridReport.AllowUserToDeleteRows = false;
-            this.gridReport.AllowUserToOrderColumns = true;
             this.gridReport.AllowUserToResizeColumns = false;
             this.gridReport.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -143,6 +149,7 @@
             this.clDiffReport,
             this.clNetReport,
             this.clDeltaReport});
+            this.gridReport.ContextMenuStrip = this.clipboardMenu;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 10F);
@@ -163,65 +170,37 @@
             this.gridReport.TabIndex = 15;
             this.gridReport.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridReport_CellDoubleClick);
             this.gridReport.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridReport_CellFormatting);
+            this.gridReport.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gridReport_KeyUp);
             // 
-            // clMonth
+            // clipboardMenu
             // 
-            this.clMonth.DataPropertyName = "Month";
-            this.clMonth.HeaderText = "Month";
-            this.clMonth.Name = "clMonth";
-            this.clMonth.ReadOnly = true;
-            this.clMonth.Visible = false;
+            this.clipboardMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyCellToolStripMenuItem,
+            this.copyRowToolStripMenuItem,
+            this.copyTableToolStripMenuItem});
+            this.clipboardMenu.Name = "clipboardMenu";
+            this.clipboardMenu.Size = new System.Drawing.Size(134, 70);
             // 
-            // clDayReport
+            // copyCellToolStripMenuItem
             // 
-            this.clDayReport.DataPropertyName = "Day";
-            this.clDayReport.HeaderText = "Day";
-            this.clDayReport.Name = "clDayReport";
-            this.clDayReport.ReadOnly = true;
-            this.clDayReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.clDayReport.Width = 60;
+            this.copyCellToolStripMenuItem.Name = "copyCellToolStripMenuItem";
+            this.copyCellToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyCellToolStripMenuItem.Text = "Copy Cell";
+            this.copyCellToolStripMenuItem.Click += new System.EventHandler(this.copyCellToolStripMenuItem_Click);
             // 
-            // clStartReport
+            // copyRowToolStripMenuItem
             // 
-            this.clStartReport.DataPropertyName = "Start";
-            this.clStartReport.HeaderText = "Start";
-            this.clStartReport.Name = "clStartReport";
-            this.clStartReport.ReadOnly = true;
-            this.clStartReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.copyRowToolStripMenuItem.Name = "copyRowToolStripMenuItem";
+            this.copyRowToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyRowToolStripMenuItem.Text = "Copy Row";
+            this.copyRowToolStripMenuItem.Click += new System.EventHandler(this.copyRowToolStripMenuItem_Click);
             // 
-            // clEndReport
+            // copyTableToolStripMenuItem
             // 
-            this.clEndReport.DataPropertyName = "End";
-            this.clEndReport.HeaderText = "End";
-            this.clEndReport.Name = "clEndReport";
-            this.clEndReport.ReadOnly = true;
-            this.clEndReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // clDiffReport
-            // 
-            this.clDiffReport.DataPropertyName = "Difference";
-            this.clDiffReport.HeaderText = "Diff";
-            this.clDiffReport.Name = "clDiffReport";
-            this.clDiffReport.ReadOnly = true;
-            this.clDiffReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // clNetReport
-            // 
-            this.clNetReport.DataPropertyName = "Net";
-            this.clNetReport.HeaderText = "Net";
-            this.clNetReport.Name = "clNetReport";
-            this.clNetReport.ReadOnly = true;
-            this.clNetReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.clNetReport.Width = 75;
-            // 
-            // clDeltaReport
-            // 
-            this.clDeltaReport.DataPropertyName = "Delta";
-            this.clDeltaReport.HeaderText = "Delta";
-            this.clDeltaReport.Name = "clDeltaReport";
-            this.clDeltaReport.ReadOnly = true;
-            this.clDeltaReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.clDeltaReport.Width = 75;
+            this.copyTableToolStripMenuItem.Name = "copyTableToolStripMenuItem";
+            this.copyTableToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyTableToolStripMenuItem.Text = "Copy Table";
+            this.copyTableToolStripMenuItem.Click += new System.EventHandler(this.copyTableToolStripMenuItem_Click);
             // 
             // monthYearPicker
             // 
@@ -449,6 +428,72 @@
             this.lblTotalDelta.Text = "00:00";
             this.lblTotalDelta.TextChanged += new System.EventHandler(this.lblLabel_TextChanged);
             // 
+            // clMonth
+            // 
+            this.clMonth.DataPropertyName = "Month";
+            this.clMonth.HeaderText = "Month";
+            this.clMonth.Name = "clMonth";
+            this.clMonth.ReadOnly = true;
+            this.clMonth.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clMonth.Visible = false;
+            // 
+            // clDayReport
+            // 
+            this.clDayReport.DataPropertyName = "Day";
+            this.clDayReport.HeaderText = "Day";
+            this.clDayReport.Name = "clDayReport";
+            this.clDayReport.ReadOnly = true;
+            this.clDayReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clDayReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clDayReport.Width = 60;
+            // 
+            // clStartReport
+            // 
+            this.clStartReport.DataPropertyName = "Start";
+            this.clStartReport.HeaderText = "Start";
+            this.clStartReport.Name = "clStartReport";
+            this.clStartReport.ReadOnly = true;
+            this.clStartReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clStartReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clEndReport
+            // 
+            this.clEndReport.DataPropertyName = "End";
+            this.clEndReport.HeaderText = "End";
+            this.clEndReport.Name = "clEndReport";
+            this.clEndReport.ReadOnly = true;
+            this.clEndReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clEndReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clDiffReport
+            // 
+            this.clDiffReport.DataPropertyName = "Difference";
+            this.clDiffReport.HeaderText = "Diff";
+            this.clDiffReport.Name = "clDiffReport";
+            this.clDiffReport.ReadOnly = true;
+            this.clDiffReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clDiffReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clNetReport
+            // 
+            this.clNetReport.DataPropertyName = "Net";
+            this.clNetReport.HeaderText = "Net";
+            this.clNetReport.Name = "clNetReport";
+            this.clNetReport.ReadOnly = true;
+            this.clNetReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clNetReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clNetReport.Width = 75;
+            // 
+            // clDeltaReport
+            // 
+            this.clDeltaReport.DataPropertyName = "Delta";
+            this.clDeltaReport.HeaderText = "Delta";
+            this.clDeltaReport.Name = "clDeltaReport";
+            this.clDeltaReport.ReadOnly = true;
+            this.clDeltaReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clDeltaReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clDeltaReport.Width = 75;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -482,6 +527,7 @@
             this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.popupMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridReport)).EndInit();
+            this.clipboardMenu.ResumeLayout(false);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridToday)).EndInit();
@@ -519,6 +565,10 @@
         private System.Windows.Forms.Label lblAvgDelta;
         private System.Windows.Forms.Label lblTotalNet;
         private System.Windows.Forms.Label lblTotalDelta;
+        private System.Windows.Forms.ContextMenuStrip clipboardMenu;
+        private System.Windows.Forms.ToolStripMenuItem copyRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyCellToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyTableToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn clMonth;
         private System.Windows.Forms.DataGridViewTextBoxColumn clDayReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn clStartReport;

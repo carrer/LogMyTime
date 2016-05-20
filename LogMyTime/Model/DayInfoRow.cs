@@ -27,5 +27,15 @@ namespace LogMyTime.Model
             this.Net = net;
             this.Delta = delta;
         }
+
+        public string ToString(char delimiter)
+        {
+            return this.Day + delimiter
+                 + this.Start + delimiter
+                 + this.End + delimiter
+                 + this.Difference + delimiter
+                 + this.Net + delimiter
+                 + this.Delta;
+        }
     }
 }
