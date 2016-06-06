@@ -74,12 +74,13 @@ namespace LogMyTime
             set
             {
                 todayRow.Cells[0].Value = value.Day;
-                todayRow.Cells[1].Value = value.Start;
-                todayRow.Cells[2].Value = value.End;
-                todayRow.Cells[3].Value = value.Difference;
-                todayRow.Cells[4].Value = value.Net;
-                todayRow.Cells[5].Value = value.Delta;
-                todayRow.Cells[6].Value = value.Comment;
+                todayRow.Cells[1].Value = value.Weekday;
+                todayRow.Cells[2].Value = value.Start;
+                todayRow.Cells[3].Value = value.End;
+                todayRow.Cells[4].Value = value.Difference;
+                todayRow.Cells[5].Value = value.Net;
+                todayRow.Cells[6].Value = value.Delta;
+                todayRow.Cells[7].Value = value.Comment;
                 gridToday.Refresh();
             }
         }
@@ -262,7 +263,7 @@ namespace LogMyTime
         {
             if (e.Value != null)
             {
-                if (e.ColumnIndex == 6)
+                if (e.ColumnIndex == 7)
                 {
                     if (e.Value.ToString().IndexOf('-') != -1)
                     {
@@ -285,7 +286,7 @@ namespace LogMyTime
 
         private void gridToday_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value != null && e.ColumnIndex == 5)
+            if (e.Value != null && e.ColumnIndex == 6)
                 if (e.Value.ToString().IndexOf('-') != -1)
                 {
                     e.CellStyle.BackColor = Color.Red;
@@ -304,18 +305,18 @@ namespace LogMyTime
 
         private void gridReport_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex >= 2 && e.ColumnIndex <= 3)
+            if (e.ColumnIndex >= 3 && e.ColumnIndex <= 4)
             {
-                int c = e.ColumnIndex == 2 ? 0 : 1;
+                int c = e.ColumnIndex == 3 ? 0 : 1;
                 Presenter.RequestDateEdit(e.RowIndex, c, false);
             }
         }
 
         private void gridToday_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex >= 1 && e.ColumnIndex <= 2)
+            if (e.ColumnIndex >= 2 && e.ColumnIndex <= 3)
             {
-                int c = e.ColumnIndex == 1 ? 0 : 1;
+                int c = e.ColumnIndex == 2 ? 0 : 1;
                 Presenter.RequestDateEdit(e.RowIndex, c, true);
             }
         }
@@ -332,14 +333,14 @@ namespace LogMyTime
 
         private void gridReport_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            if (gridReport.Rows[e.RowIndex].Cells[7].Value.ToString().Length>0)
+            if (gridReport.Rows[e.RowIndex].Cells[8].Value.ToString().Length>0)
             {
                 using (SolidBrush b = new SolidBrush(gridReport.RowHeadersDefaultCellStyle.ForeColor))
                 {
                     b.Color = Color.Red;
                     e.Graphics.DrawString("•", e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
                 }
-                gridReport.Rows[e.RowIndex].HeaderCell.ToolTipText = gridReport.Rows[e.RowIndex].Cells[7].Value.ToString();
+                gridReport.Rows[e.RowIndex].HeaderCell.ToolTipText = gridReport.Rows[e.RowIndex].Cells[8].Value.ToString();
             }
 
         }
@@ -362,14 +363,14 @@ namespace LogMyTime
 
         private void gridToday_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            if (gridToday.Rows[e.RowIndex].Cells[6].Value.ToString().Length > 0)
+            if (gridToday.Rows[e.RowIndex].Cells[7].Value.ToString().Length > 0)
             {
                 using (SolidBrush b = new SolidBrush(gridToday.RowHeadersDefaultCellStyle.ForeColor))
                 {
                     b.Color = Color.Red;
                     e.Graphics.DrawString("•", e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
                 }
-                gridToday.Rows[e.RowIndex].HeaderCell.ToolTipText = gridToday.Rows[e.RowIndex].Cells[6].Value.ToString();
+                gridToday.Rows[e.RowIndex].HeaderCell.ToolTipText = gridToday.Rows[e.RowIndex].Cells[7].Value.ToString();
             }
         }
 

@@ -136,6 +136,11 @@ namespace LogMyTime
             return date.ToString("dd/MM");
         }
 
+        public string GetWeekday()
+        {
+            return date.ToString("dddd");
+        }
+
         public string GetFormattedFirstActivity()
         {
             return activityFirst != null ? activityFirst.Value.ToString("HH:mm:ss") : "(missing)";

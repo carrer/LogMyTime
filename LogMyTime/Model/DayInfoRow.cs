@@ -9,6 +9,7 @@ namespace LogMyTime.Model
     {
         public string Month { set; get; }
         public string Day { set; get; }
+        public string Weekday { set; get; }
         public string Start { set; get; }
         public string End { set; get; }
         public string Difference { set; get; }
@@ -18,10 +19,11 @@ namespace LogMyTime.Model
 
         public DayInfoRow() { }
 
-        public DayInfoRow(string month, string day, string start, string end, string diff, string net, string delta, string comment)
+        public DayInfoRow(string month, string day, string weekday, string start, string end, string diff, string net, string delta, string comment)
         {
             this.Month = month;
             this.Day = day;
+            this.Weekday = weekday;
             this.Start = start;
             this.End = end;
             this.Difference = diff;
@@ -33,6 +35,7 @@ namespace LogMyTime.Model
         public string ToString(char delimiter)
         {
             return this.Day + delimiter
+                 + this.Weekday + delimiter
                  + this.Start + delimiter
                  + this.End + delimiter
                  + this.Difference + delimiter
