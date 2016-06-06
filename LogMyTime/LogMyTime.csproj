@@ -90,14 +90,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\CommentModel.cs" />
     <Compile Include="Model\ConfigurationSettings.cs" />
     <Compile Include="Model\ConfigurationModel.cs" />
     <Compile Include="Model\DateInputModel.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\DayInfoRow.cs" />
+    <Compile Include="Presenter\CommentPresenter.cs" />
     <Compile Include="Presenter\ConfigurationPresenter.cs" />
     <Compile Include="Presenter\DateInputPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="View\Comment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Comment.Designer.cs">
+      <DependentUpon>Comment.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Configuration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +135,9 @@
     <Compile Include="View\Warn.Designer.cs">
       <DependentUpon>Warn.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\Comment.resx">
+      <DependentUpon>Comment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Configuration.resx">
       <DependentUpon>Configuration.cs</DependentUpon>
     </EmbeddedResource>

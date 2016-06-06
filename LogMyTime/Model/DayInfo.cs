@@ -8,6 +8,7 @@ namespace LogMyTime
         protected DateTime date;
         protected Nullable<DateTime> activityFirst;
         protected Nullable<DateTime> activityLast;
+        protected string comment = "";
 
         public DayInfo()
         {
@@ -19,41 +20,52 @@ namespace LogMyTime
             this.date = date;
             this.activityFirst = first;
             this.activityLast = last;
+            this.comment = "";
+        }
+
+        public DayInfo(DateTime date, DateTime first, DateTime last, string comment)
+        {
+            this.date = date;
+            this.activityFirst = first;
+            this.activityLast = last;
+            this.comment = comment;
         }
 
         public DayInfo(string csvLine)
         {
-            string[] dates = csvLine.Split(';');
-            if (dates != null && dates.Count() == 3)
+            string[] info = csvLine.Split(';');
+            if (info != null && info.Count() >= 3)
             {
-                if (dates[0].Length > 0)
+                if (info[0].Length > 0)
                     try
                     {
-                        this.date = DateTime.ParseExact(dates[0], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                        this.date = DateTime.ParseExact(info[0], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                     }
                     catch (Exception e)
                     {
                         this.date = DateTime.Now;
                     }
 
-                if (dates[1].Length > 0)
+                if (info[1].Length > 0)
                     try
                     {
-                        this.activityFirst = DateTime.ParseExact(GetDateToString() + dates[1], "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                        this.activityFirst = DateTime.ParseExact(GetDateToString() + info[1], "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
                     }
                     catch (Exception e)
                     {
                         //ignore
                     }
-                if (dates[1].Length > 0)
+                if (info[2].Length > 0)
                     try
                     {
-                        this.activityLast = DateTime.ParseExact(GetDateToString() + dates[2], "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                        this.activityLast = DateTime.ParseExact(GetDateToString() + info[2], "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
                     }
                     catch (Exception e)
                     {
                         //ignore
                     }
+                if (info.Length > 3 && info[3].Length > 0)
+                    this.comment = info[3];
             }
             else
                 this.date = DateTime.Now;
@@ -63,7 +75,7 @@ namespace LogMyTime
         {
             string d1 = activityFirst != null ? ((DateTime)activityFirst).ToString("HHmmss") : "";
             string d2 = activityLast != null ? ((DateTime)activityLast).ToString("HHmmss") : "";
-            return date.ToString("yyyyMMdd") + ";" + d1 + ";" + d2;
+            return date.ToString("yyyyMMdd") + ";" + d1 + ";" + d2 + ";" + comment;
         }
 
         public string getFilename()
@@ -92,6 +104,16 @@ namespace LogMyTime
         public string getSubDirectory()
         {
             return string.Format("{0:D4}\\{1:D2}\\", date.Year, date.Month);
+        }
+
+        public string GetComment()
+        {
+            return comment;
+        }
+
+        public void SetComment(string info)
+        {
+            comment = info;
         }
 
         public string GetMonth()

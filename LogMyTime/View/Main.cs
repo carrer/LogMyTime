@@ -1,5 +1,6 @@
 ﻿using LogMyTime.Model;
 using LogMyTime.Presenter;
+using LogMyTime.View;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,6 +16,7 @@ namespace LogMyTime
         public MainPresenter Presenter { get; set; }
         private bool canClose = false;
         private DataGridViewRow todayRow;
+
 
         public MainView()
         {
@@ -45,12 +47,23 @@ namespace LogMyTime
         public void ShowDateInputForm(DateTime datetime)
         {
             DateInputModel model = new DateInputModel();
-            DateInputView view = new DateInputView(this);
+            DateInputView view = new DateInputView();
             DateInputPresenter presenter = new DateInputPresenter(model, view);
             presenter.setContext(datetime);
             view.ShowDialog();
             if (model.HasChanged)
                 Presenter.GridEntryHasChanged(model.Date);
+        }
+
+        public void ShowComment(DayInfoRow row)
+        {
+            CommentModel model = new CommentModel();
+            model.Comment = row.Comment;
+            CommentView view = new CommentView();
+            CommentPresenter presenter = new CommentPresenter(model, view);
+            view.ShowDialog();
+            if (model.HasChanged)
+                Presenter.GridCommentEntryHasChanged(model.Comment);
         }
 
         /* setters/getters */
@@ -64,6 +77,7 @@ namespace LogMyTime
                 todayRow.Cells[3].Value = value.Difference;
                 todayRow.Cells[4].Value = value.Net;
                 todayRow.Cells[5].Value = value.Delta;
+                todayRow.Cells[6].Value = value.Comment;
             }
         }
 
@@ -157,6 +171,7 @@ namespace LogMyTime
             Presenter.Load();
         }
 
+
         // Prevent from closing the form and exiting the app
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -219,21 +234,27 @@ namespace LogMyTime
 
         private void gridReport_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value != null && e.ColumnIndex == 6)
-                if (e.Value.ToString().IndexOf('-') != -1)
+            if (e.Value != null)
+            {
+                if (e.ColumnIndex == 6)
                 {
-                    e.CellStyle.BackColor = Color.Red;
-                    e.CellStyle.ForeColor = Color.White;
-                    e.CellStyle.SelectionBackColor = Color.DarkRed;
-                    e.CellStyle.SelectionForeColor = Color.White;
+                    if (e.Value.ToString().IndexOf('-') != -1)
+                    {
+                        e.CellStyle.BackColor = Color.Red;
+                        e.CellStyle.ForeColor = Color.White;
+                        e.CellStyle.SelectionBackColor = Color.DarkRed;
+                        e.CellStyle.SelectionForeColor = Color.White;
+                    }
+                    else
+                    {
+                        e.CellStyle.BackColor = Color.Green;
+                        e.CellStyle.ForeColor = Color.White;
+                        e.CellStyle.SelectionBackColor = Color.DarkGreen;
+                        e.CellStyle.SelectionForeColor = Color.White;
+                    }
                 }
-                else
-                {
-                    e.CellStyle.BackColor = Color.Green;
-                    e.CellStyle.ForeColor = Color.White;
-                    e.CellStyle.SelectionBackColor = Color.DarkGreen;
-                    e.CellStyle.SelectionForeColor = Color.White;
-                }
+            }
+
         }
 
         private void gridToday_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -281,6 +302,48 @@ namespace LogMyTime
                 label.ForeColor = Color.Red;
             else
                 label.ForeColor = Color.Black;
+        }
+
+        private void gridReport_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (gridReport.Rows[e.RowIndex].Cells[7].Value.ToString().Length>0)
+            {
+                using (SolidBrush b = new SolidBrush(gridReport.RowHeadersDefaultCellStyle.ForeColor))
+                {
+                    b.Color = Color.Red;
+                    e.Graphics.DrawString("•", e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
+                }
+                gridReport.Rows[e.RowIndex].HeaderCell.ToolTipText = gridReport.Rows[e.RowIndex].Cells[7].Value.ToString();
+            }
+        }
+
+        private void gridReport_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int currentColumn = gridReport.CurrentCell.ColumnIndex;
+            gridReport.CurrentCell = gridReport.Rows[e.RowIndex].Cells[1];
+        }
+
+        private void gridReport_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            Presenter.RequestCommentEdit(e.RowIndex);
+        }
+
+        private void gridToday_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            Presenter.RequestTodayCommentEdit();
+        }
+
+        private void gridToday_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (gridToday.Rows[e.RowIndex].Cells[6].Value.ToString().Length > 0)
+            {
+                using (SolidBrush b = new SolidBrush(gridToday.RowHeadersDefaultCellStyle.ForeColor))
+                {
+                    b.Color = Color.Red;
+                    e.Graphics.DrawString("•", e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
+                }
+                gridToday.Rows[e.RowIndex].HeaderCell.ToolTipText = gridToday.Rows[e.RowIndex].Cells[6].Value.ToString();
+            }
         }
     }
 }

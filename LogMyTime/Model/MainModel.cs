@@ -50,9 +50,10 @@ namespace LogMyTime.Model
             string prefix = row.Month + row.Day;
             string start = row.Start.Replace(":", "");
             string end = row.End.Replace(":", "");
-            DayInfo d = new DayInfo(prefix + ";" + start + ";" + end);
+            DayInfo d = new DayInfo(prefix + ";" + start + ";" + end+";" + row.Comment);
             if (d.GetDateToString().Equals(today.GetDateToString()))
             {
+                today.SetComment(d.GetComment());
                 today.setFirstActivity(d.GetFormattedFirstActivity());
                 Tick();
             }
@@ -105,7 +106,7 @@ namespace LogMyTime.Model
 
         public DayInfoRow GetTodayRow()
         {
-            return new DayInfoRow(today.GetMonth(), today.GetDay(), today.GetFormattedFirstActivity(), today.GetFormattedLastActivity(), Utils.MinutesToString(Diff), Utils.MinutesToString(Net), Utils.MinutesToString(Delta));
+            return new DayInfoRow(today.GetMonth(), today.GetDay(), today.GetFormattedFirstActivity(), today.GetFormattedLastActivity(), Utils.MinutesToString(Diff), Utils.MinutesToString(Net), Utils.MinutesToString(Delta), today.GetComment());
         }
 
         public void CalcMonth()
@@ -143,7 +144,7 @@ namespace LogMyTime.Model
                 int delta = worked - config.Workload;
                 TotalNet += worked;
                 TotalDelta += delta;
-                dataset.Add(new DayInfoRow(day.GetMonth(), day.GetDay(), Utils.SecondsToString((int)first.TimeOfDay.TotalSeconds), Utils.SecondsToString((int)last.TimeOfDay.TotalSeconds), Utils.MinutesToString(raw), Utils.MinutesToString(worked), Utils.MinutesToString(delta)));
+                dataset.Add(new DayInfoRow(day.GetMonth(), day.GetDay(), Utils.SecondsToString((int)first.TimeOfDay.TotalSeconds), Utils.SecondsToString((int)last.TimeOfDay.TotalSeconds), Utils.MinutesToString(raw), Utils.MinutesToString(worked), Utils.MinutesToString(delta), day.GetComment()));
             }
             if (files.Count>0)
             {

@@ -48,17 +48,12 @@
             this.clDiffReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clNetReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clDeltaReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clCommentReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.monthYearPicker = new System.Windows.Forms.DateTimePicker();
             this.lblHistoricalDataCaption = new System.Windows.Forms.Label();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridToday = new System.Windows.Forms.DataGridView();
-            this.clDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clDiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clNet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clDelta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblAvg = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -69,6 +64,13 @@
             this.lblAvgDelta = new System.Windows.Forms.Label();
             this.lblTotalNet = new System.Windows.Forms.Label();
             this.lblTotalDelta = new System.Windows.Forms.Label();
+            this.clDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clNet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDelta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.popupMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridReport)).BeginInit();
             this.mainMenu.SuspendLayout();
@@ -142,7 +144,8 @@
             this.clEndReport,
             this.clDiffReport,
             this.clNetReport,
-            this.clDeltaReport});
+            this.clDeltaReport,
+            this.clCommentReport});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 10F);
@@ -155,14 +158,16 @@
             this.gridReport.MultiSelect = false;
             this.gridReport.Name = "gridReport";
             this.gridReport.ReadOnly = true;
-            this.gridReport.RowHeadersVisible = false;
             this.gridReport.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridReport.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.gridReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridReport.Size = new System.Drawing.Size(535, 196);
+            this.gridReport.Size = new System.Drawing.Size(576, 196);
             this.gridReport.TabIndex = 15;
             this.gridReport.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridReport_CellDoubleClick);
             this.gridReport.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridReport_CellFormatting);
+            this.gridReport.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridReport_RowHeaderMouseClick);
+            this.gridReport.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridReport_RowHeaderMouseDoubleClick);
+            this.gridReport.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.gridReport_RowPostPaint);
             // 
             // clMonth
             // 
@@ -223,6 +228,14 @@
             this.clDeltaReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.clDeltaReport.Width = 75;
             // 
+            // clCommentReport
+            // 
+            this.clCommentReport.DataPropertyName = "Comment";
+            this.clCommentReport.HeaderText = "Comment";
+            this.clCommentReport.Name = "clCommentReport";
+            this.clCommentReport.ReadOnly = true;
+            this.clCommentReport.Visible = false;
+            // 
             // monthYearPicker
             // 
             this.monthYearPicker.CustomFormat = "MM/yyyy";
@@ -248,7 +261,7 @@
             this.settingsToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(559, 24);
+            this.mainMenu.Size = new System.Drawing.Size(601, 24);
             this.mainMenu.TabIndex = 21;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -282,7 +295,8 @@
             this.clEnd,
             this.clDiff,
             this.clNet,
-            this.clDelta});
+            this.clDelta,
+            this.clComment});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 10F);
@@ -295,60 +309,16 @@
             this.gridToday.MultiSelect = false;
             this.gridToday.Name = "gridToday";
             this.gridToday.ReadOnly = true;
-            this.gridToday.RowHeadersVisible = false;
             this.gridToday.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridToday.RowTemplate.ReadOnly = true;
             this.gridToday.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.gridToday.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridToday.Size = new System.Drawing.Size(535, 48);
+            this.gridToday.Size = new System.Drawing.Size(576, 48);
             this.gridToday.TabIndex = 24;
             this.gridToday.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridToday_CellDoubleClick);
             this.gridToday.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridToday_CellFormatting);
-            // 
-            // clDay
-            // 
-            this.clDay.HeaderText = "Today";
-            this.clDay.Name = "clDay";
-            this.clDay.ReadOnly = true;
-            this.clDay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clDay.Width = 82;
-            // 
-            // clStart
-            // 
-            this.clStart.HeaderText = "Start";
-            this.clStart.Name = "clStart";
-            this.clStart.ReadOnly = true;
-            this.clStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clEnd
-            // 
-            this.clEnd.HeaderText = "End";
-            this.clEnd.Name = "clEnd";
-            this.clEnd.ReadOnly = true;
-            this.clEnd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clDiff
-            // 
-            this.clDiff.HeaderText = "Diff";
-            this.clDiff.Name = "clDiff";
-            this.clDiff.ReadOnly = true;
-            this.clDiff.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clNet
-            // 
-            this.clNet.HeaderText = "Net";
-            this.clNet.Name = "clNet";
-            this.clNet.ReadOnly = true;
-            this.clNet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clNet.Width = 75;
-            // 
-            // clDelta
-            // 
-            this.clDelta.HeaderText = "Delta";
-            this.clDelta.Name = "clDelta";
-            this.clDelta.ReadOnly = true;
-            this.clDelta.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clDelta.Width = 75;
+            this.gridToday.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridToday_RowHeaderMouseDoubleClick);
+            this.gridToday.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.gridToday_RowPostPaint);
             // 
             // lblAvg
             // 
@@ -449,11 +419,64 @@
             this.lblTotalDelta.Text = "00:00";
             this.lblTotalDelta.TextChanged += new System.EventHandler(this.lblLabel_TextChanged);
             // 
+            // clDay
+            // 
+            this.clDay.HeaderText = "Today";
+            this.clDay.Name = "clDay";
+            this.clDay.ReadOnly = true;
+            this.clDay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clDay.Width = 82;
+            // 
+            // clStart
+            // 
+            this.clStart.HeaderText = "Start";
+            this.clStart.Name = "clStart";
+            this.clStart.ReadOnly = true;
+            this.clStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clEnd
+            // 
+            this.clEnd.HeaderText = "End";
+            this.clEnd.Name = "clEnd";
+            this.clEnd.ReadOnly = true;
+            this.clEnd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clDiff
+            // 
+            this.clDiff.HeaderText = "Diff";
+            this.clDiff.Name = "clDiff";
+            this.clDiff.ReadOnly = true;
+            this.clDiff.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clNet
+            // 
+            this.clNet.HeaderText = "Net";
+            this.clNet.Name = "clNet";
+            this.clNet.ReadOnly = true;
+            this.clNet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clNet.Width = 75;
+            // 
+            // clDelta
+            // 
+            this.clDelta.HeaderText = "Delta";
+            this.clDelta.Name = "clDelta";
+            this.clDelta.ReadOnly = true;
+            this.clDelta.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clDelta.Width = 75;
+            // 
+            // clComment
+            // 
+            this.clComment.HeaderText = "Comment";
+            this.clComment.Name = "clComment";
+            this.clComment.ReadOnly = true;
+            this.clComment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clComment.Visible = false;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 368);
+            this.ClientSize = new System.Drawing.Size(601, 368);
             this.Controls.Add(this.lblTotalDelta);
             this.Controls.Add(this.lblTotalNet);
             this.Controls.Add(this.lblAvgDelta);
@@ -506,12 +529,6 @@
         private System.Windows.Forms.Label lblAvg;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clDay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clStart;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clDiff;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clNet;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clDelta;
         private System.Windows.Forms.Label lblAvgStart;
         private System.Windows.Forms.Label lblAvgEnd;
         private System.Windows.Forms.Label lblAvgDiff;
@@ -526,6 +543,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clDiffReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn clNetReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn clDeltaReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clCommentReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clDay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clStart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clDiff;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clNet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clDelta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clComment;
     }
 }
 

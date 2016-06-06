@@ -8,26 +8,26 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LogMyTime
+namespace LogMyTime.View
 {
-    public partial class DateInputView : Form
+    public partial class CommentView : Form
     {
-        public DateInputPresenter Presenter { get; set; }
+        public CommentPresenter Presenter { get; set; }
 
-        public DateInputView()
+        public CommentView()
         {
             InitializeComponent();
         }
 
-        public DateTime DateField
+        public string Comment
         {
-            set
-            {
-                dtInput.Value = value;
-            }
             get
             {
-                return dtInput.Value;
+                return txtComment.Text;
+            }
+            set
+            {
+                txtComment.Text = value;
             }
         }
 
@@ -36,7 +36,12 @@ namespace LogMyTime
             Presenter.OK();
         }
 
-        private void dtInput_KeyDown(object sender, KeyEventArgs e)
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            Presenter.Clear();
+        }
+
+        private void txtComment_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

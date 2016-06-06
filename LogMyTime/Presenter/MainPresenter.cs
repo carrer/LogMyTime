@@ -135,5 +135,25 @@ namespace LogMyTime.Presenter
             UpdateWorkingHour();
 
         }
+
+        public void GridCommentEntryHasChanged(string comment)
+        {
+            edit.Comment = comment;
+            model.UpdateRow(edit);
+            UpdateMonth();
+            UpdateWorkingHour();
+        }
+
+        public void RequestCommentEdit(int index)
+        {
+            edit = model.GetDataSet()[index];
+            view.ShowComment(edit);
+        }
+
+        public void RequestTodayCommentEdit()
+        {
+            edit = model.GetTodayRow();
+            view.ShowComment(edit);
+        }
     }
 }
