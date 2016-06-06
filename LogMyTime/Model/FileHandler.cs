@@ -70,5 +70,12 @@ namespace LogMyTime
             return output;
         }
 
+        public bool DeleteFile(string subdirectory, string filename)
+        {
+            if (File.Exists(DataPath + subdirectory + filename))
+                File.Delete(DataPath + subdirectory + filename);
+
+            return !File.Exists(DataPath + subdirectory + filename);
+        }
     }
 }

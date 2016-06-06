@@ -23,6 +23,7 @@ namespace LogMyTime
         {
             InitializeComponent();
             MaximizeBox = false;
+
         }
 
         /* auxiliary funcs */
@@ -208,6 +209,25 @@ namespace LogMyTime
             Close();
         }
 
+        public void ShowNewDay(string v)
+        {
+            DayModel model = new DayModel();
+            model.SetMonth(v);
+            DayView view = new DayView();
+            DayPresenter presenter = new DayPresenter(model, view);
+            view.ShowDialog();
+            if (model.HasAdded)
+                Presenter.GridEntryAdded();
+
+        }
+
+        public bool RequestConfirmation()
+        {
+            return MessageBox.Show("This operation can't be undone. Are you sure you want to proceed?",
+            "Delete record",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+        }
+
         private void trayIcon_DoubleClick(object sender, EventArgs e)
         {
             Presenter.RequestRestore();
@@ -321,6 +341,7 @@ namespace LogMyTime
                 }
                 gridReport.Rows[e.RowIndex].HeaderCell.ToolTipText = gridReport.Rows[e.RowIndex].Cells[7].Value.ToString();
             }
+
         }
 
         private void gridReport_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -368,7 +389,7 @@ namespace LogMyTime
         {
             Presenter.CopyToClipboard(-1, -1);
         }
-
+ 
 
         private void gridReport_KeyUp(object sender, KeyEventArgs e)
         {
@@ -384,6 +405,34 @@ namespace LogMyTime
                 }
                 e.Handled = true;
             }
+            if (e.KeyCode == Keys.Delete)
+            {
+                Presenter.RequestDelete(gridReport.SelectedCells[0].RowIndex);
+            }
+        }
+
+        private void gridReport_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex == -1 && e.ColumnIndex == -1)
+            {
+                Font bold = new Font(gridReport.ColumnHeadersDefaultCellStyle.Font, FontStyle.Bold);
+                e.Graphics.DrawString("+", bold, new SolidBrush(gridReport.ColumnHeadersDefaultCellStyle.ForeColor), e.CellBounds.Location.X + 15, e.CellBounds.Location.Y + 4);
+                e.Paint(e.ClipBounds, (DataGridViewPaintParts.All & ~DataGridViewPaintParts.Background));
+                e.Handled = true;
+            }
+        }
+
+        private void gridReport_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == -1 && e.RowIndex == -1)
+            {
+                Presenter.RequestAddDay();
+            }
+        }
+
+        private void gridReport_RowHeaderMouseClick_1(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            gridReport.Rows[e.RowIndex].Cells[1].Selected = true;
         }
     }
 }

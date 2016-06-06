@@ -160,6 +160,12 @@ namespace LogMyTime.Model
             }
         }
 
+        public void DeleteDay(DayInfoRow dayInfoRow)
+        {
+            DayInfo day = new DayInfo(dayInfoRow.Month + dayInfoRow.Day + ";;;");
+            io.DeleteFile(day.getSubDirectory(), day.getFilename());
+        }
+
         public void InjectPath(string path)
         {
             io.InjectPath(path);

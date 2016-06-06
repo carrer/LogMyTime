@@ -186,5 +186,25 @@ namespace LogMyTime.Presenter
 
             Clipboard.SetText(sb.ToString());
         }
+
+        public void RequestAddDay()
+        {
+            view.ShowNewDay(model.GetToday().GetMonth());
+        }
+
+        public void GridEntryAdded()
+        {
+            UpdateMonth();
+        }
+
+        public void RequestDelete(int recordIndex)
+        {
+            if (!(model.IsCurrentMonth() && recordIndex == 0))
+            if (view.RequestConfirmation())
+            {
+                model.DeleteDay(model.GetDataSet()[recordIndex]);
+                UpdateMonth();
+            }
+        }
     }
 }
