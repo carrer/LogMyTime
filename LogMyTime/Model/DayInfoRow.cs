@@ -37,7 +37,8 @@ namespace LogMyTime.Model
                  + this.End + delimiter
                  + this.Difference + delimiter
                  + this.Net + delimiter
-                 + this.Delta;
+                 + this.Delta + delimiter
+                 + this.Comment;
         }
     }
 }

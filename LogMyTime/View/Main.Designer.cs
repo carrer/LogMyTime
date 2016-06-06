@@ -47,7 +47,6 @@ namespace LogMyTime
             this.copyCellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clCommentReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.monthYearPicker = new System.Windows.Forms.DateTimePicker();
             this.lblHistoricalDataCaption = new System.Windows.Forms.Label();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
@@ -70,6 +69,14 @@ namespace LogMyTime
             this.clDiffReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clNetReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clDeltaReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clCommentReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clToday = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDiff = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clNet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDelta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.popupMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridReport)).BeginInit();
             this.clipboardMenu.SuspendLayout();
@@ -154,21 +161,21 @@ namespace LogMyTime
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridReport.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gridReport.Location = new System.Drawing.Point(12, 121);
+            this.gridReport.Location = new System.Drawing.Point(12, 125);
             this.gridReport.MultiSelect = false;
             this.gridReport.Name = "gridReport";
             this.gridReport.ReadOnly = true;
             this.gridReport.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridReport.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.gridReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridReport.Size = new System.Drawing.Size(576, 196);
+            this.gridReport.Size = new System.Drawing.Size(550, 192);
             this.gridReport.TabIndex = 15;
             this.gridReport.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridReport_CellDoubleClick);
             this.gridReport.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridReport_CellFormatting);
             this.gridReport.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridReport_RowHeaderMouseClick);
-            this.gridReport.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gridReport_KeyUp);
             this.gridReport.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridReport_RowHeaderMouseDoubleClick);
             this.gridReport.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.gridReport_RowPostPaint);
+            this.gridReport.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gridReport_KeyUp);
             // 
             // clipboardMenu
             // 
@@ -200,14 +207,6 @@ namespace LogMyTime
             this.copyTableToolStripMenuItem.Text = "Copy Table";
             this.copyTableToolStripMenuItem.Click += new System.EventHandler(this.copyTableToolStripMenuItem_Click);
             // 
-            // clCommentReport
-            // 
-            this.clCommentReport.DataPropertyName = "Comment";
-            this.clCommentReport.HeaderText = "Comment";
-            this.clCommentReport.Name = "clCommentReport";
-            this.clCommentReport.ReadOnly = true;
-            this.clCommentReport.Visible = false;
-            // 
             // monthYearPicker
             // 
             this.monthYearPicker.CustomFormat = "MM/yyyy";
@@ -233,7 +232,7 @@ namespace LogMyTime
             this.settingsToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(601, 24);
+            this.mainMenu.Size = new System.Drawing.Size(575, 24);
             this.mainMenu.TabIndex = 21;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -262,7 +261,7 @@ namespace LogMyTime
             this.gridToday.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridToday.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridToday.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clDay,
+            this.clToday,
             this.clStart,
             this.clEnd,
             this.clDiff,
@@ -285,7 +284,7 @@ namespace LogMyTime
             this.gridToday.RowTemplate.ReadOnly = true;
             this.gridToday.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.gridToday.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridToday.Size = new System.Drawing.Size(576, 48);
+            this.gridToday.Size = new System.Drawing.Size(550, 48);
             this.gridToday.TabIndex = 24;
             this.gridToday.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridToday_CellDoubleClick);
             this.gridToday.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridToday_CellFormatting);
@@ -318,13 +317,13 @@ namespace LogMyTime
             this.panel1.Location = new System.Drawing.Point(12, 340);
             this.panel1.Margin = new System.Windows.Forms.Padding(1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(535, 1);
+            this.panel1.Size = new System.Drawing.Size(545, 1);
             this.panel1.TabIndex = 27;
             // 
             // lblAvgStart
             // 
             this.lblAvgStart.AutoSize = true;
-            this.lblAvgStart.Location = new System.Drawing.Point(95, 320);
+            this.lblAvgStart.Location = new System.Drawing.Point(144, 320);
             this.lblAvgStart.Name = "lblAvgStart";
             this.lblAvgStart.Size = new System.Drawing.Size(58, 17);
             this.lblAvgStart.TabIndex = 28;
@@ -334,7 +333,7 @@ namespace LogMyTime
             // lblAvgEnd
             // 
             this.lblAvgEnd.AutoSize = true;
-            this.lblAvgEnd.Location = new System.Drawing.Point(194, 320);
+            this.lblAvgEnd.Location = new System.Drawing.Point(243, 320);
             this.lblAvgEnd.Name = "lblAvgEnd";
             this.lblAvgEnd.Size = new System.Drawing.Size(58, 17);
             this.lblAvgEnd.TabIndex = 29;
@@ -344,7 +343,7 @@ namespace LogMyTime
             // lblAvgDiff
             // 
             this.lblAvgDiff.AutoSize = true;
-            this.lblAvgDiff.Location = new System.Drawing.Point(303, 320);
+            this.lblAvgDiff.Location = new System.Drawing.Point(339, 320);
             this.lblAvgDiff.Name = "lblAvgDiff";
             this.lblAvgDiff.Size = new System.Drawing.Size(40, 17);
             this.lblAvgDiff.TabIndex = 31;
@@ -354,7 +353,7 @@ namespace LogMyTime
             // lblAvgNet
             // 
             this.lblAvgNet.AutoSize = true;
-            this.lblAvgNet.Location = new System.Drawing.Point(392, 320);
+            this.lblAvgNet.Location = new System.Drawing.Point(408, 320);
             this.lblAvgNet.Name = "lblAvgNet";
             this.lblAvgNet.Size = new System.Drawing.Size(40, 17);
             this.lblAvgNet.TabIndex = 32;
@@ -364,7 +363,7 @@ namespace LogMyTime
             // lblAvgDelta
             // 
             this.lblAvgDelta.AutoSize = true;
-            this.lblAvgDelta.Location = new System.Drawing.Point(467, 320);
+            this.lblAvgDelta.Location = new System.Drawing.Point(477, 320);
             this.lblAvgDelta.Name = "lblAvgDelta";
             this.lblAvgDelta.Size = new System.Drawing.Size(40, 17);
             this.lblAvgDelta.TabIndex = 33;
@@ -374,7 +373,7 @@ namespace LogMyTime
             // lblTotalNet
             // 
             this.lblTotalNet.AutoSize = true;
-            this.lblTotalNet.Location = new System.Drawing.Point(392, 343);
+            this.lblTotalNet.Location = new System.Drawing.Point(408, 343);
             this.lblTotalNet.Name = "lblTotalNet";
             this.lblTotalNet.Size = new System.Drawing.Size(40, 17);
             this.lblTotalNet.TabIndex = 34;
@@ -384,7 +383,7 @@ namespace LogMyTime
             // lblTotalDelta
             // 
             this.lblTotalDelta.AutoSize = true;
-            this.lblTotalDelta.Location = new System.Drawing.Point(467, 343);
+            this.lblTotalDelta.Location = new System.Drawing.Point(477, 343);
             this.lblTotalDelta.Name = "lblTotalDelta";
             this.lblTotalDelta.Size = new System.Drawing.Size(40, 17);
             this.lblTotalDelta.TabIndex = 35;
@@ -408,7 +407,7 @@ namespace LogMyTime
             this.clDayReport.ReadOnly = true;
             this.clDayReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.clDayReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clDayReport.Width = 60;
+            this.clDayReport.Width = 70;
             // 
             // clStartReport
             // 
@@ -436,6 +435,7 @@ namespace LogMyTime
             this.clDiffReport.ReadOnly = true;
             this.clDiffReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.clDiffReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clDiffReport.Width = 70;
             // 
             // clNetReport
             // 
@@ -445,7 +445,7 @@ namespace LogMyTime
             this.clNetReport.ReadOnly = true;
             this.clNetReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.clNetReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clNetReport.Width = 75;
+            this.clNetReport.Width = 70;
             // 
             // clDeltaReport
             // 
@@ -455,13 +455,68 @@ namespace LogMyTime
             this.clDeltaReport.ReadOnly = true;
             this.clDeltaReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.clDeltaReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clDeltaReport.Width = 75;
+            this.clDeltaReport.Width = 70;
+            // 
+            // clCommentReport
+            // 
+            this.clCommentReport.DataPropertyName = "Comment";
+            this.clCommentReport.HeaderText = "Comment";
+            this.clCommentReport.Name = "clCommentReport";
+            this.clCommentReport.ReadOnly = true;
+            this.clCommentReport.Visible = false;
+            // 
+            // clToday
+            // 
+            this.clToday.HeaderText = "Day";
+            this.clToday.Name = "clToday";
+            this.clToday.ReadOnly = true;
+            this.clToday.Width = 70;
+            // 
+            // clStart
+            // 
+            this.clStart.HeaderText = "Start";
+            this.clStart.Name = "clStart";
+            this.clStart.ReadOnly = true;
+            // 
+            // clEnd
+            // 
+            this.clEnd.HeaderText = "End";
+            this.clEnd.Name = "clEnd";
+            this.clEnd.ReadOnly = true;
+            // 
+            // clDiff
+            // 
+            this.clDiff.HeaderText = "Diff";
+            this.clDiff.Name = "clDiff";
+            this.clDiff.ReadOnly = true;
+            this.clDiff.Width = 70;
+            // 
+            // clNet
+            // 
+            this.clNet.HeaderText = "Net";
+            this.clNet.Name = "clNet";
+            this.clNet.ReadOnly = true;
+            this.clNet.Width = 70;
+            // 
+            // clDelta
+            // 
+            this.clDelta.HeaderText = "Delta";
+            this.clDelta.Name = "clDelta";
+            this.clDelta.ReadOnly = true;
+            this.clDelta.Width = 70;
+            // 
+            // clComment
+            // 
+            this.clComment.HeaderText = "Comment";
+            this.clComment.Name = "clComment";
+            this.clComment.ReadOnly = true;
+            this.clComment.Visible = false;
             // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 368);
+            this.ClientSize = new System.Drawing.Size(575, 368);
             this.Controls.Add(this.lblTotalDelta);
             this.Controls.Add(this.lblTotalNet);
             this.Controls.Add(this.lblAvgDelta);
@@ -534,7 +589,7 @@ namespace LogMyTime
         private System.Windows.Forms.DataGridViewTextBoxColumn clNetReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn clDeltaReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn clCommentReport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clDay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clToday;
         private System.Windows.Forms.DataGridViewTextBoxColumn clStart;
         private System.Windows.Forms.DataGridViewTextBoxColumn clEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn clDiff;

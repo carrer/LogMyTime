@@ -79,6 +79,7 @@ namespace LogMyTime
                 todayRow.Cells[4].Value = value.Net;
                 todayRow.Cells[5].Value = value.Delta;
                 todayRow.Cells[6].Value = value.Comment;
+                gridToday.Refresh();
             }
         }
 

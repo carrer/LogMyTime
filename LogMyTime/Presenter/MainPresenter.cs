@@ -162,6 +162,7 @@ namespace LogMyTime.Presenter
             StringBuilder sb = new StringBuilder();
             if (column == -1)
             {
+                sb.AppendLine("Day\tStart\tEnd\tDiff\tNet\tDelta\tComment");
                 if (row == -1)
                 {
                     foreach (DayInfoRow day in view.DataSet)
