@@ -25,9 +25,13 @@ namespace LogMyTime.Model
         public Int32 Net { get; set; }
         public Int32 Delta { get; set; }
 
-        public void Load()
+        public MainModel()
         {
             today = new DayInfo();
+        }
+
+        public void Load()
+        {
             string line = io.ReadFromFile(today.getSubDirectory(), today.getFilename());
             today = line.Length > 0 ? new DayInfo(line) : new DayInfo();
             Tick();
@@ -56,6 +60,7 @@ namespace LogMyTime.Model
                 today.SetComment(d.GetComment());
                 today.setFirstActivity(d.GetFormattedFirstActivity());
                 Tick();
+                PersistData();
             }
             else
                 io.WriteToFile(d.getSubDirectory(), d.getFilename(), d.ToCSV());
@@ -69,7 +74,6 @@ namespace LogMyTime.Model
         public void Tick()
         {
             today.tick();
-            PersistData();
             DateTime first = today.getFirstActivity().Value;
             DateTime last = today.getLastActivity().Value;
             int worked = (int)(last - first).TotalMinutes;

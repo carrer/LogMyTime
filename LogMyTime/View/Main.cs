@@ -3,6 +3,7 @@ using LogMyTime.Presenter;
 using LogMyTime.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -160,6 +161,10 @@ namespace LogMyTime
 
                 if (gridReport.RowCount > r && gridReport.Rows[r].Cells.Count > c)
                     gridReport.CurrentCell = gridReport.Rows[r].Cells[c];
+            }
+            get
+            {
+                return (List<DayInfoRow>) gridReport.DataSource;
             }
         }
 
@@ -343,6 +348,40 @@ namespace LogMyTime
                     e.Graphics.DrawString("•", e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
                 }
                 gridToday.Rows[e.RowIndex].HeaderCell.ToolTipText = gridToday.Rows[e.RowIndex].Cells[6].Value.ToString();
+            }
+        }
+
+        private void copyRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (gridReport.SelectedCells.Count > 0)
+                Presenter.CopyToClipboard(-1, gridReport.SelectedCells[0].RowIndex);
+        }
+
+        private void copyCellToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (gridReport.SelectedCells.Count > 0)
+                Presenter.CopyToClipboard(gridReport.SelectedCells[0].ColumnIndex, gridReport.SelectedCells[0].RowIndex);
+        }
+
+        private void copyTableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Presenter.CopyToClipboard(-1, -1);
+        }
+
+
+        private void gridReport_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == (Keys.C | Keys.Control))
+            {
+                if (gridReport.SelectedCells.Count>0)
+                {
+                    DataGridViewCell cell = gridReport.SelectedCells[0];
+                    int left = gridReport.GetCellDisplayRectangle(cell.ColumnIndex, cell.RowIndex, false).Left;
+                    int top = gridReport.GetCellDisplayRectangle(cell.ColumnIndex, cell.RowIndex, false).Top;
+                    clipboardMenu.Show(this, new Point(gridReport.Left + left, gridReport.Top + top + gridReport.RowTemplate.Height));
+                    clipboardMenu.Items[0].Select();
+                }
+                e.Handled = true;
             }
         }
     }

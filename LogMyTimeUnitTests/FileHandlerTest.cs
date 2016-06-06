@@ -10,10 +10,10 @@ namespace LogMyTimeUnitTests
     [TestClass]
     public class FileHandlerTest
     {
-        [ClassCleanup]
-        public static void cleanup()
+        [ClassInitialize]
+        public static void CleanUp(TestContext context)
         {
-            if (File.Exists(Directory.GetCurrentDirectory()+"\\data\\2000\\12\\20001210.csv"))
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\data\\2000\\12\\20001210.csv"))
                 File.Delete(Directory.GetCurrentDirectory() + "\\data\\2000\\12\\20001210.csv");
         }
 
@@ -44,8 +44,8 @@ namespace LogMyTimeUnitTests
             io.WriteToFile("2000\\12\\", "20001210.csv", "20001210;060000;040000");
             Assert.AreEqual<string>("20001210;060000;040000", io.ReadFromFile("2000\\12\\", "20001210.csv"));
             List<String> files = io.ListAllFiles("2000\\12\\");
-            Assert.IsTrue(files.Count != 0);
-            Assert.AreEqual<string>("20001201.csv", files[0]);
+            Assert.IsTrue(files.Count > 2);
+            Assert.IsTrue(files.Contains("20001201.csv"));
         }
     }
 }

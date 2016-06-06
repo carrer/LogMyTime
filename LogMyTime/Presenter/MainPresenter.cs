@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace LogMyTime.Presenter
 {
@@ -154,6 +155,35 @@ namespace LogMyTime.Presenter
         {
             edit = model.GetTodayRow();
             view.ShowComment(edit);
+        }
+
+        public void CopyToClipboard(int column, int row)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (column == -1)
+            {
+                if (row == -1)
+                {
+                    foreach (DayInfoRow day in view.DataSet)
+                        sb.AppendLine(day.ToString('\t'));
+                }
+                else
+                {
+                    sb.AppendLine(view.DataSet[row].ToString('\t'));
+                }
+            }
+            else
+                switch(column)
+                {
+                    case 1: sb.Append(view.DataSet[row].Day); break;
+                    case 2: sb.Append(view.DataSet[row].Start); break;
+                    case 3: sb.Append(view.DataSet[row].End); break;
+                    case 4: sb.Append(view.DataSet[row].Difference); break;
+                    case 5: sb.Append(view.DataSet[row].Net); break;
+                    case 6: sb.Append(view.DataSet[row].Delta); break;
+                }
+
+            Clipboard.SetText(sb.ToString());
         }
     }
 }
