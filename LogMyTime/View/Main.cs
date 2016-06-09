@@ -435,5 +435,6 @@ namespace LogMyTime
         {
             gridReport.Rows[e.RowIndex].Cells[1].Selected = true;
         }
+
     }
 }

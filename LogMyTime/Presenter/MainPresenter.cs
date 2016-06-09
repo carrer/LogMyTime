@@ -206,5 +206,6 @@ namespace LogMyTime.Presenter
                 UpdateMonth();
             }
         }
+
     }
 }

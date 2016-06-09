@@ -74,6 +74,7 @@ namespace LogMyTime.Model
         public void Tick()
         {
             today.tick();
+            PersistData();
             DateTime first = today.getFirstActivity().Value;
             DateTime last = today.getLastActivity().Value;
             int worked = (int)(last - first).TotalMinutes;
@@ -96,6 +97,7 @@ namespace LogMyTime.Model
             Diff = raw;
             Net = worked;
             Delta = worked - config.Workload;
+
         }
 
         public void SetMonth(DayInfo month)
