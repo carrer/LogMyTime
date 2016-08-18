@@ -8,6 +8,7 @@ namespace LogMyTime.Model
     public class ConfigurationModel
     {
         public int Workload { get; set; }
+        public int Tolerance { get; set; }
         public bool Startup { get; set; }
         public bool Subtract { get; set; }
         public int SubtractQuantity { get; set; }
@@ -20,6 +21,7 @@ namespace LogMyTime.Model
         {
             ConfigurationSettings config = ConfigurationSettings.GetInstance();
             Workload = config.Workload;
+            Tolerance = config.Tolerance;
             Startup = Utils.IsAtWindowsRegistry();
             Subtract = config.Subtract;
             SubtractCondition = config.SubtractCondition;
@@ -32,6 +34,7 @@ namespace LogMyTime.Model
         {
             ConfigurationSettings config = ConfigurationSettings.GetInstance();
             config.Workload = Workload;
+            config.Tolerance = Tolerance;
             config.Subtract = Subtract;
             config.SubtractCondition = SubtractCondition;
             config.SubtractQuantity = SubtractQuantity;

@@ -10,6 +10,7 @@ namespace LogMyTime
     {
         private static ConfigurationSettings instance;
         public int Workload;
+        public int Tolerance;
         public bool Startup;
         public bool Subtract;
         public int SubtractQuantity;
@@ -41,6 +42,16 @@ namespace LogMyTime
             {
                 this.Workload = 480; // 8hours
             }
+
+            try
+            {
+                this.Tolerance = Convert.ToInt32(path.GetValue("Tolerance"));
+            }
+            catch (Exception e)
+            {
+                this.Tolerance = 15; // 15min
+            }
+
             try
             {
                 this.Subtract = Convert.ToBoolean(path.GetValue("Subtract"));
@@ -75,6 +86,7 @@ namespace LogMyTime
                 return;
 
             path.SetValue("Workload", this.Workload);
+            path.SetValue("Tolerance", this.Tolerance);
             path.SetValue("Subtract", Convert.ToString(this.Subtract));
             path.SetValue("SubtractQuantity", Convert.ToString(this.SubtractQuantity));
             path.SetValue("SubtractCondition", Convert.ToString(this.SubtractCondition));

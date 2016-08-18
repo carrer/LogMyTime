@@ -39,6 +39,8 @@
             this.dtCondition = new System.Windows.Forms.DateTimePicker();
             this.lblWorkload = new System.Windows.Forms.Label();
             this.dtWorkload = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtTolerance = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // ckStartup
@@ -157,11 +159,33 @@
             this.dtWorkload.TabIndex = 14;
             this.dtWorkload.Value = new System.DateTime(2016, 5, 5, 0, 0, 0, 0);
             // 
-            // frmConfiguration
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(240, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 17);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "with tolerance of ";
+            // 
+            // dtTolerance
+            // 
+            this.dtTolerance.CustomFormat = "HH:mm";
+            this.dtTolerance.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtTolerance.Location = new System.Drawing.Point(349, 11);
+            this.dtTolerance.Name = "dtTolerance";
+            this.dtTolerance.ShowUpDown = true;
+            this.dtTolerance.Size = new System.Drawing.Size(88, 24);
+            this.dtTolerance.TabIndex = 16;
+            this.dtTolerance.Value = new System.DateTime(2016, 5, 5, 0, 0, 0, 0);
+            // 
+            // ConfigurationView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 222);
+            this.ClientSize = new System.Drawing.Size(453, 222);
+            this.Controls.Add(this.dtTolerance);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dtWorkload);
             this.Controls.Add(this.lblWorkload);
             this.Controls.Add(this.dtCondition);
@@ -177,7 +201,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmConfiguration";
+            this.Name = "ConfigurationView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Configuration";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Configuration_FormClosing);
@@ -200,5 +224,7 @@
         private System.Windows.Forms.DateTimePicker dtCondition;
         private System.Windows.Forms.Label lblWorkload;
         private System.Windows.Forms.DateTimePicker dtWorkload;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dtTolerance;
     }
 }

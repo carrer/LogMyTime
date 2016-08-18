@@ -22,6 +22,7 @@ namespace LogMyTime.Presenter
         {
             model.Load();
             view.Workload = model.Workload;
+            view.Tolerance = model.Tolerance;
             view.Subtract = model.Subtract;
             view.SubtractCondition = model.SubtractCondition;
             view.SubtractQuantity = model.SubtractQuantity;
@@ -33,6 +34,7 @@ namespace LogMyTime.Presenter
         public void Close()
         {
             model.Workload = view.Workload;
+            model.Tolerance = view.Tolerance;
             model.Subtract = view.Subtract;
             model.SubtractCondition = view.SubtractCondition;
             model.SubtractQuantity = view.SubtractQuantity;

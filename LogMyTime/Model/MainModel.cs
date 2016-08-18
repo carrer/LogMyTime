@@ -24,6 +24,7 @@ namespace LogMyTime.Model
         public Int32 Diff { get; set; }
         public Int32 Net { get; set; }
         public Int32 Delta { get; set; }
+        public bool RoundedDelta { get; set; }
 
         public MainModel()
         {
@@ -97,6 +98,13 @@ namespace LogMyTime.Model
             Diff = raw;
             Net = worked;
             Delta = worked - config.Workload;
+            if (Delta >= -config.Tolerance && Delta <= config.Tolerance)
+            {
+                Delta = config.Workload;
+                RoundedDelta = true;
+            }
+            else
+                RoundedDelta = false;
 
         }
 
@@ -112,7 +120,7 @@ namespace LogMyTime.Model
 
         public DayInfoRow GetTodayRow()
         {
-            return new DayInfoRow(today.GetMonth(), today.GetDay(), today.GetWeekday(), today.GetFormattedFirstActivity(), today.GetFormattedLastActivity(), Utils.MinutesToString(Diff), Utils.MinutesToString(Net), Utils.MinutesToString(Delta), today.GetComment());
+            return new DayInfoRow(today.GetMonth(), today.GetDay(), today.GetWeekday(), today.GetFormattedFirstActivity(), today.GetFormattedLastActivity(), Utils.MinutesToString(Diff), Utils.MinutesToString(Net), (RoundedDelta? "•" : "")+Utils.MinutesToString(Delta), today.GetComment());
         }
 
         public void CalcMonth()
@@ -148,9 +156,16 @@ namespace LogMyTime.Model
                     }
                 }
                 int delta = worked - config.Workload;
+                bool rounded = false;
+                if (delta >= -config.Tolerance && delta <= config.Tolerance)
+                {
+                    delta = config.Workload;
+                    rounded = true;
+                }
+
                 TotalNet += worked;
                 TotalDelta += delta;
-                dataset.Add(new DayInfoRow(day.GetMonth(), day.GetDay(), day.GetWeekday(), Utils.SecondsToString((int)first.TimeOfDay.TotalSeconds), Utils.SecondsToString((int)last.TimeOfDay.TotalSeconds), Utils.MinutesToString(raw), Utils.MinutesToString(worked), Utils.MinutesToString(delta), day.GetComment()));
+                dataset.Add(new DayInfoRow(day.GetMonth(), day.GetDay(), day.GetWeekday(), Utils.SecondsToString((int)first.TimeOfDay.TotalSeconds), Utils.SecondsToString((int)last.TimeOfDay.TotalSeconds), Utils.MinutesToString(raw), Utils.MinutesToString(worked), (rounded? "•" : "") + Utils.MinutesToString(delta), day.GetComment()));
             }
             if (files.Count>0)
             {

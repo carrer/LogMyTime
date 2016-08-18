@@ -272,6 +272,13 @@ namespace LogMyTime
                         e.CellStyle.SelectionBackColor = Color.DarkRed;
                         e.CellStyle.SelectionForeColor = Color.White;
                     }
+                    else if (e.Value.ToString().IndexOf('•') != -1)
+                    {
+                        e.CellStyle.BackColor = Color.MediumSeaGreen;
+                        e.CellStyle.ForeColor = Color.Black;
+                        e.CellStyle.SelectionBackColor = Color.SeaGreen;
+                        e.CellStyle.SelectionForeColor = Color.White;
+                    }
                     else
                     {
                         e.CellStyle.BackColor = Color.Green;
@@ -292,6 +299,13 @@ namespace LogMyTime
                     e.CellStyle.BackColor = Color.Red;
                     e.CellStyle.ForeColor = Color.White;
                     e.CellStyle.SelectionBackColor = Color.DarkRed;
+                    e.CellStyle.SelectionForeColor = Color.White;
+                }
+                else if (e.Value.ToString().IndexOf('•') != -1)
+                {
+                    e.CellStyle.BackColor = Color.MediumSeaGreen;
+                    e.CellStyle.ForeColor = Color.Black;
+                    e.CellStyle.SelectionBackColor = Color.SeaGreen;
                     e.CellStyle.SelectionForeColor = Color.White;
                 }
                 else

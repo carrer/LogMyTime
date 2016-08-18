@@ -42,6 +42,18 @@ namespace LogMyTime
             }
         }
 
+        public int Tolerance
+        {
+            set
+            {
+                dtTolerance.Value = Utils.IntToDateTime(value);
+            }
+            get
+            {
+                return (int)dtTolerance.Value.TimeOfDay.TotalMinutes;
+            }
+        }
+
 
         public int SubtractQuantity
         {
