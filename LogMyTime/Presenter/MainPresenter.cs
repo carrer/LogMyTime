@@ -43,9 +43,6 @@ namespace LogMyTime.Presenter
 
         public void TickSecond()
         {
-            if (DateTime.Now.TimeOfDay.TotalSeconds == 1)
-                model.TurnDay();
-
             if (InitializeMinimized)
                 if (secondsToClose-- <= 0)
                 {
@@ -72,6 +69,9 @@ namespace LogMyTime.Presenter
         {
             if (Utils.GetIdleTime() < 60000) // If I'm idle for more than a minute, don't update counter
             {
+                if (!DateTime.Now.ToString("dd").Equals(model.GetToday().GetDay())) // computer was idle for a day or more
+                    model.TurnDay();
+
                 model.Tick();
                 if (model.IsCurrentMonth())
                     UpdateMonth();

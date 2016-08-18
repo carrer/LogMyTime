@@ -396,14 +396,8 @@ namespace LogMyTime
         {
             if (e.KeyData == (Keys.C | Keys.Control))
             {
-                if (gridReport.SelectedCells.Count>0)
-                {
-                    DataGridViewCell cell = gridReport.SelectedCells[0];
-                    int left = gridReport.GetCellDisplayRectangle(cell.ColumnIndex, cell.RowIndex, false).Left;
-                    int top = gridReport.GetCellDisplayRectangle(cell.ColumnIndex, cell.RowIndex, false).Top;
-                    clipboardMenu.Show(this, new Point(gridReport.Left + left, gridReport.Top + top + gridReport.RowTemplate.Height));
-                    clipboardMenu.Items[0].Select();
-                }
+                if (gridReport.SelectedCells.Count > 0)
+                    Presenter.CopyToClipboard(gridReport.SelectedCells[0].ColumnIndex, gridReport.SelectedCells[0].RowIndex);
                 e.Handled = true;
             }
             if (e.KeyCode == Keys.Delete)
@@ -436,5 +430,9 @@ namespace LogMyTime
             gridReport.Rows[e.RowIndex].Cells[1].Selected = true;
         }
 
+        private void deleteEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Presenter.RequestDelete(gridReport.SelectedCells[0].RowIndex);
+        }
     }
 }
