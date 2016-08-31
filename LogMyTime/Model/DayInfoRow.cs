@@ -16,10 +16,11 @@ namespace LogMyTime.Model
         public string Net { set; get; }
         public string Delta { set; get; }
         public string Comment { set; get; }
+        public string ExpectedEnd { set; get; }
 
         public DayInfoRow() { }
 
-        public DayInfoRow(string month, string day, string weekday, string start, string end, string diff, string net, string delta, string comment)
+        public DayInfoRow(string month, string day, string weekday, string start, string end, string diff, string net, string delta, string expectedEnd, string comment)
         {
             this.Month = month;
             this.Day = day;
@@ -29,6 +30,7 @@ namespace LogMyTime.Model
             this.Difference = diff;
             this.Net = net;
             this.Delta = delta;
+            this.ExpectedEnd = expectedEnd;
             this.Comment = comment;
         }
 

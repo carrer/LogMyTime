@@ -177,11 +177,12 @@ namespace LogMyTime.Presenter
                 switch(column)
                 {
                     case 1: sb.Append(view.DataSet[row].Day); break;
-                    case 2: sb.Append(view.DataSet[row].Start); break;
-                    case 3: sb.Append(view.DataSet[row].End); break;
-                    case 4: sb.Append(view.DataSet[row].Difference); break;
-                    case 5: sb.Append(view.DataSet[row].Net); break;
-                    case 6: sb.Append(view.DataSet[row].Delta); break;
+                    case 2: sb.Append(view.DataSet[row].Weekday); break;
+                    case 3: sb.Append(view.DataSet[row].Start); break;
+                    case 4: sb.Append(view.DataSet[row].End); break;
+                    case 5: sb.Append(view.DataSet[row].Difference); break;
+                    case 6: sb.Append(view.DataSet[row].Net); break;
+                    case 7: sb.Append(view.DataSet[row].Delta); break;
                 }
 
             Clipboard.SetText(sb.ToString());

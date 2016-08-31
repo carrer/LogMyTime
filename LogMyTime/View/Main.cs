@@ -80,7 +80,8 @@ namespace LogMyTime
                 todayRow.Cells[4].Value = value.Difference;
                 todayRow.Cells[5].Value = value.Net;
                 todayRow.Cells[6].Value = value.Delta;
-                todayRow.Cells[7].Value = value.Comment;
+                todayRow.Cells[7].Value = value.ExpectedEnd;
+                todayRow.Cells[8].Value = value.Comment;
                 gridToday.Refresh();
             }
         }
@@ -294,6 +295,7 @@ namespace LogMyTime
         private void gridToday_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value != null && e.ColumnIndex == 6)
+            {
                 if (e.Value.ToString().IndexOf('-') != -1)
                 {
                     e.CellStyle.BackColor = Color.Red;
@@ -315,6 +317,14 @@ namespace LogMyTime
                     e.CellStyle.SelectionBackColor = Color.DarkGreen;
                     e.CellStyle.SelectionForeColor = Color.White;
                 }
+            }
+            else if (e.Value != null && e.ColumnIndex == 7)
+            {
+                e.CellStyle.BackColor = Color.Khaki;
+                e.CellStyle.ForeColor = Color.Black;
+                e.CellStyle.SelectionBackColor = Color.Goldenrod;
+                e.CellStyle.SelectionForeColor = Color.Black;
+            }
         }
 
         private void gridReport_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -375,18 +385,6 @@ namespace LogMyTime
             Presenter.RequestTodayCommentEdit();
         }
 
-        private void gridToday_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            if (gridToday.Rows[e.RowIndex].Cells[7].Value.ToString().Length > 0)
-            {
-                using (SolidBrush b = new SolidBrush(gridToday.RowHeadersDefaultCellStyle.ForeColor))
-                {
-                    b.Color = Color.Red;
-                    e.Graphics.DrawString("•", e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
-                }
-                gridToday.Rows[e.RowIndex].HeaderCell.ToolTipText = gridToday.Rows[e.RowIndex].Cells[7].Value.ToString();
-            }
-        }
 
         private void copyRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
