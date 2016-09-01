@@ -175,7 +175,7 @@ namespace LogMyTime
         /* event funcs */
         private void frmMain_Load(object sender, EventArgs e)
         {
-            gridToday.Rows.Add("dd/mm/yyyy", "00:00:00", "00:00:00", "00:00", "00:00", "00:00");
+            gridToday.Rows.Add("dd/mm/yyyy", "00:00:00", "00:00:00", "00:00", "00:00", "00:00", "", "");
             todayRow = gridToday.Rows[0];
             Presenter.Load();
         }

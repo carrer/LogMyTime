@@ -134,7 +134,7 @@ namespace LogMyTime.Model
                 }
             }
             
-            return new DayInfoRow(today.GetMonth(), today.GetDay(), today.GetWeekday(), today.GetFormattedFirstActivity(), today.GetFormattedLastActivity(), Utils.MinutesToString(Diff), Utils.MinutesToString(Net), (RoundedDelta? "•" : "")+Utils.MinutesToString(Delta), Utils.DatetimeToTime(expected), today.GetComment());
+            return new DayInfoRow(today.GetMonth(), today.GetDay()+" / "+ today.GetMonth().Substring(4), today.GetWeekday(), today.GetFormattedFirstActivity(), today.GetFormattedLastActivity(), Utils.MinutesToString(Diff), Utils.MinutesToString(Net), (RoundedDelta? "•" : "")+Utils.MinutesToString(Delta), Utils.DatetimeToTime(expected), today.GetComment());
         }
 
         public void CalcMonth()

@@ -43,15 +43,6 @@ namespace LogMyTime
             this.showApp = new System.Windows.Forms.ToolStripMenuItem();
             this.closeApp = new System.Windows.Forms.ToolStripMenuItem();
             this.gridReport = new System.Windows.Forms.DataGridView();
-            this.clMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clDayReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clWeekdayReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clStartReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clEndReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clDiffReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clNetReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clDeltaReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clCommentReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clipboardMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyCellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,6 +73,16 @@ namespace LogMyTime
             this.lblAvgDelta = new System.Windows.Forms.Label();
             this.lblTotalNet = new System.Windows.Forms.Label();
             this.lblTotalDelta = new System.Windows.Forms.Label();
+            this.clMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDayReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clWeekdayReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clStartReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clEndReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDiffReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clNetReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clDeltaReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clCommentReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clExitReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.popupMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridReport)).BeginInit();
             this.clipboardMenu.SuspendLayout();
@@ -156,7 +157,8 @@ namespace LogMyTime
             this.clDiffReport,
             this.clNetReport,
             this.clDeltaReport,
-            this.clCommentReport});
+            this.clCommentReport,
+            this.clExitReport});
             this.gridReport.ContextMenuStrip = this.clipboardMenu;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -183,89 +185,6 @@ namespace LogMyTime
             this.gridReport.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridReport_RowHeaderMouseDoubleClick);
             this.gridReport.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.gridReport_RowPostPaint);
             this.gridReport.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gridReport_KeyUp);
-            // 
-            // clMonth
-            // 
-            this.clMonth.DataPropertyName = "Month";
-            this.clMonth.HeaderText = "Month";
-            this.clMonth.Name = "clMonth";
-            this.clMonth.ReadOnly = true;
-            this.clMonth.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clMonth.Visible = false;
-            // 
-            // clDayReport
-            // 
-            this.clDayReport.DataPropertyName = "Day";
-            this.clDayReport.HeaderText = "Day";
-            this.clDayReport.Name = "clDayReport";
-            this.clDayReport.ReadOnly = true;
-            this.clDayReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.clDayReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clDayReport.Width = 70;
-            // 
-            // clWeekdayReport
-            // 
-            this.clWeekdayReport.DataPropertyName = "Weekday";
-            this.clWeekdayReport.HeaderText = "Weekday";
-            this.clWeekdayReport.Name = "clWeekdayReport";
-            this.clWeekdayReport.ReadOnly = true;
-            this.clWeekdayReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clStartReport
-            // 
-            this.clStartReport.DataPropertyName = "Start";
-            this.clStartReport.HeaderText = "Start";
-            this.clStartReport.Name = "clStartReport";
-            this.clStartReport.ReadOnly = true;
-            this.clStartReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.clStartReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clEndReport
-            // 
-            this.clEndReport.DataPropertyName = "End";
-            this.clEndReport.HeaderText = "End";
-            this.clEndReport.Name = "clEndReport";
-            this.clEndReport.ReadOnly = true;
-            this.clEndReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.clEndReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clDiffReport
-            // 
-            this.clDiffReport.DataPropertyName = "Difference";
-            this.clDiffReport.HeaderText = "Diff";
-            this.clDiffReport.Name = "clDiffReport";
-            this.clDiffReport.ReadOnly = true;
-            this.clDiffReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.clDiffReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clDiffReport.Width = 70;
-            // 
-            // clNetReport
-            // 
-            this.clNetReport.DataPropertyName = "Net";
-            this.clNetReport.HeaderText = "Net";
-            this.clNetReport.Name = "clNetReport";
-            this.clNetReport.ReadOnly = true;
-            this.clNetReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.clNetReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clNetReport.Width = 70;
-            // 
-            // clDeltaReport
-            // 
-            this.clDeltaReport.DataPropertyName = "Delta";
-            this.clDeltaReport.HeaderText = "Delta";
-            this.clDeltaReport.Name = "clDeltaReport";
-            this.clDeltaReport.ReadOnly = true;
-            this.clDeltaReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.clDeltaReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clDeltaReport.Width = 70;
-            // 
-            // clCommentReport
-            // 
-            this.clCommentReport.DataPropertyName = "Comment";
-            this.clCommentReport.HeaderText = "Comment";
-            this.clCommentReport.Name = "clCommentReport";
-            this.clCommentReport.ReadOnly = true;
-            this.clCommentReport.Visible = false;
             // 
             // clipboardMenu
             // 
@@ -559,6 +478,97 @@ namespace LogMyTime
             this.lblTotalDelta.Text = "00:00";
             this.lblTotalDelta.TextChanged += new System.EventHandler(this.lblLabel_TextChanged);
             // 
+            // clMonth
+            // 
+            this.clMonth.DataPropertyName = "Month";
+            this.clMonth.HeaderText = "Month";
+            this.clMonth.Name = "clMonth";
+            this.clMonth.ReadOnly = true;
+            this.clMonth.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clMonth.Visible = false;
+            // 
+            // clDayReport
+            // 
+            this.clDayReport.DataPropertyName = "Day";
+            this.clDayReport.HeaderText = "Day";
+            this.clDayReport.Name = "clDayReport";
+            this.clDayReport.ReadOnly = true;
+            this.clDayReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clDayReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clDayReport.Width = 70;
+            // 
+            // clWeekdayReport
+            // 
+            this.clWeekdayReport.DataPropertyName = "Weekday";
+            this.clWeekdayReport.HeaderText = "Weekday";
+            this.clWeekdayReport.Name = "clWeekdayReport";
+            this.clWeekdayReport.ReadOnly = true;
+            this.clWeekdayReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clStartReport
+            // 
+            this.clStartReport.DataPropertyName = "Start";
+            this.clStartReport.HeaderText = "Start";
+            this.clStartReport.Name = "clStartReport";
+            this.clStartReport.ReadOnly = true;
+            this.clStartReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clStartReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clEndReport
+            // 
+            this.clEndReport.DataPropertyName = "End";
+            this.clEndReport.HeaderText = "End";
+            this.clEndReport.Name = "clEndReport";
+            this.clEndReport.ReadOnly = true;
+            this.clEndReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clEndReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clDiffReport
+            // 
+            this.clDiffReport.DataPropertyName = "Difference";
+            this.clDiffReport.HeaderText = "Diff";
+            this.clDiffReport.Name = "clDiffReport";
+            this.clDiffReport.ReadOnly = true;
+            this.clDiffReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clDiffReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clDiffReport.Width = 70;
+            // 
+            // clNetReport
+            // 
+            this.clNetReport.DataPropertyName = "Net";
+            this.clNetReport.HeaderText = "Net";
+            this.clNetReport.Name = "clNetReport";
+            this.clNetReport.ReadOnly = true;
+            this.clNetReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clNetReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clNetReport.Width = 70;
+            // 
+            // clDeltaReport
+            // 
+            this.clDeltaReport.DataPropertyName = "Delta";
+            this.clDeltaReport.HeaderText = "Delta";
+            this.clDeltaReport.Name = "clDeltaReport";
+            this.clDeltaReport.ReadOnly = true;
+            this.clDeltaReport.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.clDeltaReport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clDeltaReport.Width = 70;
+            // 
+            // clCommentReport
+            // 
+            this.clCommentReport.DataPropertyName = "Comment";
+            this.clCommentReport.HeaderText = "Comment";
+            this.clCommentReport.Name = "clCommentReport";
+            this.clCommentReport.ReadOnly = true;
+            this.clCommentReport.Visible = false;
+            // 
+            // clExitReport
+            // 
+            this.clExitReport.DataPropertyName = "ExpectedEnd";
+            this.clExitReport.HeaderText = "Exit";
+            this.clExitReport.Name = "clExitReport";
+            this.clExitReport.ReadOnly = true;
+            this.clExitReport.Visible = false;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -630,15 +640,6 @@ namespace LogMyTime
         private System.Windows.Forms.ToolStripMenuItem copyTableToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem deleteEntryToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clMonth;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clDayReport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clWeekdayReport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clStartReport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clEndReport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clDiffReport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clNetReport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clDeltaReport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clCommentReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn clToday;
         private System.Windows.Forms.DataGridViewTextBoxColumn clWeekday;
         private System.Windows.Forms.DataGridViewTextBoxColumn clStart;
@@ -648,6 +649,16 @@ namespace LogMyTime
         private System.Windows.Forms.DataGridViewTextBoxColumn clDelta;
         private System.Windows.Forms.DataGridViewTextBoxColumn clExit;
         private System.Windows.Forms.DataGridViewTextBoxColumn clComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clMonth;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clDayReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clWeekdayReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clStartReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clEndReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clDiffReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clNetReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clDeltaReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clCommentReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clExitReport;
     }
 }
 
