@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LogMyTime</RootNamespace>
     <AssemblyName>LogMyTime</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -92,44 +92,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\CommentModel.cs" />
-    <Compile Include="Model\ConfigurationSettings.cs" />
-    <Compile Include="Model\ConfigurationModel.cs" />
-    <Compile Include="Model\DateInputModel.cs" />
-    <Compile Include="Model\DayModel.cs" />
+    <Compile Include="Model\TimeBook.cs" />
+    <Compile Include="Model\ProgramInfo.cs" />
+    <Compile Include="Model\Engine.cs" />
+    <Compile Include="Model\Counter.cs" />
+    <Compile Include="Model\TimeCard.cs" />
     <Compile Include="Model\MainModel.cs" />
-    <Compile Include="Model\DayInfoRow.cs" />
-    <Compile Include="Presenter\CommentPresenter.cs" />
-    <Compile Include="Presenter\ConfigurationPresenter.cs" />
-    <Compile Include="Presenter\DateInputPresenter.cs" />
-    <Compile Include="Presenter\DayPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
-    <Compile Include="View\Comment.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Comment.Designer.cs">
-      <DependentUpon>Comment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Configuration.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Configuration.Designer.cs">
-      <DependentUpon>Configuration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\DateInput.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\DateInput.Designer.cs">
-      <DependentUpon>DateInput.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DayInfo.cs" />
     <Compile Include="Model\FileHandler.cs" />
-    <Compile Include="View\Day.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Day.Designer.cs">
-      <DependentUpon>Day.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,24 +109,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Utils.cs" />
-    <Compile Include="View\Warn.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Warn.Designer.cs">
-      <DependentUpon>Warn.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="View\Comment.resx">
-      <DependentUpon>Comment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Configuration.resx">
-      <DependentUpon>Configuration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\DateInput.resx">
-      <DependentUpon>DateInput.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Day.resx">
-      <DependentUpon>Day.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,10 +122,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\Warn.resx">
-      <DependentUpon>Warn.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="App.config" />
+    <Resource Include="Resources\Digital.ttf" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -206,8 +156,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\rec.png" />
+    <None Include="Resources\Stop.png" />
+    <None Include="Resources\Play.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MouseKeyboardLibrary\MouseKeyboardLibrary.csproj">
+      <Project>{f419622f-4d82-40a6-b4fb-3fe36579f018}</Project>
+      <Name>MouseKeyboardLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -20,6 +20,11 @@ namespace LogMyTime
             return Directory.Exists(DataPath + subdirectory);
         }
 
+        public bool FileExists(string subdirectory, string filename)
+        {
+            return File.Exists(DataPath + subdirectory + filename);
+        }
+
         protected bool CreateDataDirectory(string subdirectory)
         {
             if (!VerifyDataDirectory(subdirectory))
@@ -36,7 +41,7 @@ namespace LogMyTime
             try
             {
                 File.WriteAllText(DataPath + subdirectory + filename, text);
-            } catch(Exception e)
+            } catch(Exception)
             {
                 return false;
             }
@@ -51,7 +56,7 @@ namespace LogMyTime
                 {
                     return File.ReadAllText(DataPath + subdirectory + filename);
                 }
-                catch (Exception e) {
+                catch (Exception) {
                     // in the worst case, I'll return an empty string
                 }
             }
